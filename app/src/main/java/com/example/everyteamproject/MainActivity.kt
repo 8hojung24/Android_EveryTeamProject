@@ -10,6 +10,8 @@ import android.widget.TextView
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 
+/* <solid android:color="#6D9773" /> // 배경색 */
+
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
