@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name = "모두의 팀플"
