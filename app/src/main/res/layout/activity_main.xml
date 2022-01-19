@@ -11,6 +11,7 @@
         android:id="@+id/explainText"
         android:layout_width="120dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
         android:hint="추가 버튼을 눌러서 팀플을 시작해보세요"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -86,13 +87,23 @@
         android:id="@+id/backButton"
         android:layout_width="301dp"
         android:layout_height="157dp"
-        android:layout_marginTop="41dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/shape"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/calendarView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/calendarView" />
+
+    <TextView
+        android:id="@+id/Ongoing"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="70dp"
+        android:layout_marginEnd="306dp"
+        android:layout_marginBottom="15dp"
+        android:text="Ongoing"
+        app:layout_constraintBottom_toTopOf="@+id/backButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
