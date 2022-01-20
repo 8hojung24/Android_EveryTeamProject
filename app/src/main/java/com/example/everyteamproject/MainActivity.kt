@@ -1,11 +1,15 @@
 package com.example.everyteamproject
 
+import android.R.attr.button
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+
 
 /* <solid android:color="#6D9773" /> // 배경색 */
 
@@ -14,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
     lateinit var mainView: View
     lateinit var backButton: Button
-    lateinit var addView: ImageView
+    lateinit var addButton: Button
     lateinit var explainText: TextView
     lateinit var calendarView: CalendarView
 
@@ -27,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         mainView = findViewById(R.id.mainView)
         backButton = findViewById(R.id.backButton)
-        addView = findViewById(R.id.addView)
+        addButton = findViewById(R.id.addButton)
         explainText = findViewById(R.id.explainText)
         calendarView = findViewById(R.id.calendarView)
 
@@ -56,6 +60,11 @@ class MainActivity : AppCompatActivity() {
         }
         */
 
+        addButton.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity4::class.java)
+            startActivity(intent)
+        }
+
     }
 
 
@@ -82,11 +91,13 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId){
             R.id.action_settings -> {
-                //mainView.display
+                val intent = Intent(this@MainActivity, MainActivity2::class.java)
+                startActivity(intent)
                 return true
             }
             R.id.action_edit -> {
-                //mainView.display
+                val intent = Intent(this@MainActivity, MainActivity3::class.java)
+                startActivity(intent)
                 return true
             }
         }
