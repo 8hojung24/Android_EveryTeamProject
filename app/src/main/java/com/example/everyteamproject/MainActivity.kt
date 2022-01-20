@@ -9,6 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import android.util.Log
+import com.kakao.sdk.common.util.Utility
+import android.app.Application
+import com.kakao.sdk.common.KakaoSdk
 
 
 /* <solid android:color="#6D9773" /> // 배경색 */
@@ -34,6 +38,9 @@ class MainActivity : AppCompatActivity() {
         addButton = findViewById(R.id.addButton)
         explainText = findViewById(R.id.explainText)
         calendarView = findViewById(R.id.calendarView)
+
+        val keyHash = Utility.getKeyHash(this)
+        Log.d("Hash", keyHash)
 
         /*
         addView.bringToFront()
@@ -103,5 +110,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         return super.onOptionsItemSelected(item)
+    }
+}
+
+class GlobalApplication : Application() {
+    override fun onCreate() {
+        super.onCreate()
+
+        KakaoSdk.init(this, "1bb17a51c07ce090a59cb0cf97c10379")
     }
 }
