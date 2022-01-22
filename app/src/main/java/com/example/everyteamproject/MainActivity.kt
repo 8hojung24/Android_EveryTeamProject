@@ -39,6 +39,7 @@ class MainActivity : AppCompatActivity() {
         explainText = findViewById(R.id.explainText)
         calendarView = findViewById(R.id.calendarView)
 
+        // 카카오 로그인 hash 키
         val keyHash = Utility.getKeyHash(this)
         Log.d("Hash", keyHash)
 
@@ -67,6 +68,7 @@ class MainActivity : AppCompatActivity() {
         }
         */
 
+        // 추가 버튼 클릭시 MainActivity4로 이동
         addButton.setOnClickListener {
             val intent = Intent(this@MainActivity, MainActivity4::class.java)
             startActivity(intent)
@@ -95,6 +97,7 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
+    // 설정 액션바 -> MainActivity2   편집 액션바 -> MainActivity3
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId){
             R.id.action_settings -> {
@@ -113,6 +116,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+// 카카오 로그인
 class GlobalApplication : Application() {
     override fun onCreate() {
         super.onCreate()
