@@ -1,51 +1,52 @@
 package com.example.everyteamproject
 
+import android.R.attr.button
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.kakao.sdk.common.util.Utility
 import android.app.Application
-import android.view.*
 import com.kakao.sdk.common.KakaoSdk
 
 
 /* <solid android:color="#6D9773" /> // 배경색 */
 
 @Suppress("DEPRECATION")
-class MainActivity : AppCompatActivity(){
+class MainActivity : AppCompatActivity() {
 
     lateinit var mainView: View
+    lateinit var backButton: Button
     lateinit var addButton: Button
+    lateinit var explainText: TextView
     lateinit var calendarView: CalendarView
-    lateinit var backgroundText: TextView
-    lateinit var btnOne: Button
-    lateinit var btnTwo: Button
-    lateinit var btnThree: Button
-    lateinit var btnFour: Button
-    lateinit var btnFive: Button
-    lateinit var btnSix: Button
+
+    var fname: String = ""
+    var str: String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         mainView = findViewById(R.id.mainView)
+        backButton = findViewById(R.id.backButton)
         addButton = findViewById(R.id.addButton)
+        explainText = findViewById(R.id.explainText)
         calendarView = findViewById(R.id.calendarView)
-        backgroundText = findViewById(R.id.backgroundText)
-        btnOne = findViewById(R.id.btnOne)
-        btnTwo = findViewById(R.id.btnTwo)
-        btnThree = findViewById(R.id.btnThree)
-        btnFour = findViewById(R.id.btnFour)
-        btnFive = findViewById(R.id.btnFive)
-        btnSix = findViewById(R.id.btnSix)
 
         // 카카오 로그인 hash 키
         val keyHash = Utility.getKeyHash(this)
         Log.d("Hash", keyHash)
 
+        /*
+        addView.bringToFront()
+        explainText.bringToFront()
+        */
 
         /*
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
@@ -73,32 +74,8 @@ class MainActivity : AppCompatActivity(){
             startActivity(intent)
         }
 
-        // Fragment_one = MainActivity
-        btnOne.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_one()) .commit()
-        }
-
-        // Fragment_two = 2번 page
-        btnTwo.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_two()) .commit()
-        }
-
-        btnThree.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_three()) .commit()
-        }
-
-        btnFour.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_four()) .commit()
-        }
-
-        btnFive.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_five()) .commit()
-        }
-
-        btnSix.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_six()) .commit()
-        }
     }
+
 
     // 하단 소프트키 없애기 (몰입모드)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
