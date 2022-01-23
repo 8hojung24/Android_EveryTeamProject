@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.everyteamproject">
-
-    <!-- 인터넷 사용 권한 설정-->
+    <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -13,10 +12,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.모두의팀플">
-        <activity android:name=".Registration"></activity>
-
+        <activity android:name=".Edit"></activity>
+        <activity android:name=".Registration" />
         <activity android:name=".LoginActivity">
-        <!--<activity android:name=".MainActivity">-->
+
+            <!-- <activity android:name=".MainActivity"> -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -35,12 +35,10 @@
                     android:scheme="kakao1bb17a51c07ce090a59cb0cf97c10379" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"></activity>
-        <activity android:name=".MainActivity2"></activity>
-        <activity android:name=".MainActivity3"></activity>
-        <activity android:name=".MainActivity4"></activity>
-        <!--<activity android:name=".LoginActivity"></activity>-->
-
+        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity2" />
+        <activity android:name=".MainActivity3" />
+        <activity android:name=".MainActivity4" />
     </application>
 
 </manifest>
