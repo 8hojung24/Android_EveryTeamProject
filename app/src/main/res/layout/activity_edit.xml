@@ -4,10 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-<<<<<<< HEAD
     tools:context=".EditActivity">
-=======
-    tools:context=".Registration">
 
     <EditText
         android:id="@+id/E_Subject"
@@ -15,7 +12,7 @@
         android:layout_height="45dp"
         android:layout_marginTop="36dp"
         android:layout_marginEnd="12dp"
-        android:background="null"
+        android:background="#00FFFFFF"
         android:ems="10"
         android:hint="주제를 입력해주세요"
         android:inputType="textPersonName"
@@ -192,6 +189,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/E_Role"
         app:srcCompat="@drawable/ic_baseline_add_24" />
->>>>>>> origin/master
 
 </androidx.constraintlayout.widget.ConstraintLayout>
