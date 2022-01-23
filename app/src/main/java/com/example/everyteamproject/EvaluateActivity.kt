@@ -7,11 +7,12 @@ import android.view.MenuItem
 import android.view.View
 
 @Suppress("DEPRECATION")
-class MainActivity4 : AppCompatActivity() {
+class EvaluateActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main4)
+        setContentView(R.layout.activity_evaluate)
     }
+
 
     // 하단 소프트키 없애기 (몰입모드)
     override fun onWindowFocusChanged(hasFocus: Boolean) {

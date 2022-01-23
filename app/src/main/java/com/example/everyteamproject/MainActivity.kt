@@ -1,18 +1,14 @@
 package com.example.everyteamproject
 
-import android.R.attr.button
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.kakao.sdk.common.util.Utility
-import android.app.Application
-import com.kakao.sdk.common.KakaoSdk
 
 
 /* <solid android:color="#6D9773" /> // 배경색 */
@@ -49,11 +45,6 @@ class MainActivity : AppCompatActivity() {
         Log.d("Hash", keyHash)
 
         /*
-        addView.bringToFront()
-        explainText.bringToFront()
-        */
-
-        /*
         calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
 // 달력 날짜가 선택되면
             diaryTextView.visibility = View.VISIBLE // 해당 날짜가 뜨는 textView가 Visible
@@ -73,9 +64,9 @@ class MainActivity : AppCompatActivity() {
         }
         */
 
-        // 추가 버튼 클릭시 MainActivity4로 이동
+        // 추가 버튼 클릭시 Registration 로 이동
         addButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, MainActivity4::class.java)
+            val intent = Intent(this@MainActivity, Registration::class.java)
             startActivity(intent)
         }
 
@@ -126,16 +117,16 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    // 설정 액션바 -> MainActivity2   편집 액션바 -> MainActivity3
+    // 설정 액션바 -> SetActivity   편집 액션바 -> EditActivity
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item?.itemId){
             R.id.action_settings -> {
-                val intent = Intent(this@MainActivity, MainActivity2::class.java)
+                val intent = Intent(this@MainActivity, SetActivity::class.java)
                 startActivity(intent)
                 return true
             }
             R.id.action_edit -> {
-                val intent = Intent(this@MainActivity, MainActivity3::class.java)
+                val intent = Intent(this@MainActivity, EditActivity::class.java)
                 startActivity(intent)
                 return true
             }
@@ -145,11 +136,13 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
-/* LoginActivity.kt로 class 이동
+/*
+// LoginActivity.kt로 class 이동
 // 카카오 로그인
 class GlobalApplication : Application() {
     override fun onCreate() {
         super.onCreate()
+
         KakaoSdk.init(this, "1bb17a51c07ce090a59cb0cf97c10379")
     }
 }*/

@@ -7,10 +7,10 @@ import android.view.MenuItem
 import android.view.View
 
 @Suppress("DEPRECATION")
-class MainActivity3 : AppCompatActivity() {
+class EditActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main3)
+        setContentView(R.layout.activity_edit)
     }
 
     // 하단 소프트키 없애기 (몰입모드)

@@ -7,11 +7,12 @@ import android.view.MenuItem
 import android.view.View
 
 @Suppress("DEPRECATION")
-class MainActivity2 : AppCompatActivity() {
+class IntroActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main2)
+        setContentView(R.layout.activity_intro)
     }
+
 
     // 하단 소프트키 없애기 (몰입모드)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
@@ -25,7 +26,6 @@ class MainActivity2 : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
     }
-
 
     // 메뉴바 -> 몰입모드 실행 시 필요 X
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
