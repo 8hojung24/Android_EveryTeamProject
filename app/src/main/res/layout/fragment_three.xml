@@ -87,7 +87,7 @@
         android:paddingTop="4dp"
         android:paddingEnd="4dp"
         android:paddingBottom="4dp"
-        android:text="\n\n\n\n추가 버튼을 눌러서 \n 팀플을 시작해보세요"
+        android:text="\n\n\n\n팀플을 시작해보세요"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="15dp"
