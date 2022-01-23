@@ -13,6 +13,7 @@ import android.util.Log
 import com.kakao.sdk.common.util.Utility
 import android.app.Application
 import com.kakao.sdk.common.KakaoSdk
+import com.kakao.sdk.user.UserApiClient
 
 
 /* <solid android:color="#6D9773" /> // 배경색 */
@@ -74,6 +75,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        val nickname = findViewById<TextView>(R.id.textView5) // 로그인 버튼
+        UserApiClient.instance.me { user, error ->
+            nickname.text = "${user?.kakaoAccount?.profile?.nickname}"
+        }
     }
 
 
