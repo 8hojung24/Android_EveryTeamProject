@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kakao.sdk.common.util.Utility
 
 
@@ -117,8 +118,12 @@ class MainActivity : AppCompatActivity() {
         return true
     }
 
-    // 설정 액션바 -> SetActivity   편집 액션바 -> EditActivity
+    // 설정 액션바 -> SetActivity   편집 액션바 -> Bottom_sheet_layout
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
+        val bottomSheetDialog = BottomSheetDialog(this)
+        bottomSheetDialog.setContentView(bottomSheetView)
+
         when(item?.itemId){
             R.id.action_settings -> {
                 val intent = Intent(this@MainActivity, SetActivity::class.java)
@@ -126,8 +131,9 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
             R.id.action_edit -> {
-                val intent = Intent(this@MainActivity, EditActivity::class.java)
-                startActivity(intent)
+                bottomSheetDialog.show()
+                //val intent = Intent(this@MainActivity, Bottom_sheet_layout::class.java)
+                //startActivity(intent)
                 return true
             }
         }
