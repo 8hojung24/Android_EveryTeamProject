@@ -13,6 +13,7 @@ import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.model.AuthErrorCause
 import com.kakao.sdk.user.UserApiClient
 
+
 class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+
 
 // 카카오 로그인
 class GlobalApplication : Application() {
