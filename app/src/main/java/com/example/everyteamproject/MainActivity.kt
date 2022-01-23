@@ -116,6 +116,7 @@ class MainActivity : AppCompatActivity() {
     }
 }
 
+/* LoginActivity.kt로 class 이동
 // 카카오 로그인
 class GlobalApplication : Application() {
     override fun onCreate() {
@@ -123,4 +124,4 @@ class GlobalApplication : Application() {
 
         KakaoSdk.init(this, "1bb17a51c07ce090a59cb0cf97c10379")
     }
-}
+}*/
