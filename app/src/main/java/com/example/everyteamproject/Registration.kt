@@ -7,6 +7,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
+import java.text.SimpleDateFormat
 import java.util.*
 
 class Registration : AppCompatActivity() {
@@ -15,8 +16,6 @@ class Registration : AppCompatActivity() {
     lateinit var R_ClosingTime:TextView
     lateinit var R_ClosingDate:TextView
     lateinit var R_EditBtn:Button
-    var dateString=""
-    var timeString=""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,19 +28,25 @@ class Registration : AppCompatActivity() {
 
         R_ClosingDateBtn.setOnClickListener{
             val cal = Calendar.getInstance()
-            val dateSetListener = DatePickerDialog.OnDateSetListener {
-                view, month, dayOfMonth, weekDay ->
-                dateString = "${month+1}"+"." +"${dayOfMonth}"+"("+"${weekDay}"+")"
+            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+                cal.set(year, month, dayOfMonth)
+                val Date = cal.time
+                val Simpledateformat = SimpleDateFormat("EEEE", Locale.getDefault())
+                val DayName: String = Simpledateformat.format(Date)
+                R_ClosingDate.text = "${month+1}.${dayOfMonth}($DayName)"
             }
-            DatePickerDialog(this, dateSetListener, cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH), cal.get(Calendar.DAY_OF_WEEK)).show()
+            val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
+
+            //           최소 날짜를 현재 시각 이후로
+            dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
+            dpd.show()
         }
 
         R_ClosingTime.setOnClickListener{
             val cal = Calendar.getInstance()
             var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
-                timeString = "${hourOfDay}"+":"+"${minute}"
-                R_ClosingDate.text = dateString
-                R_ClosingTime.text = timeString
+                R_ClosingTime.text = "${hourOfDay}"+":"+"${minute}"
+
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
         }

@@ -14,7 +14,8 @@
         android:layout_marginEnd="12dp"
         android:ems="10"
         android:hint="주제를 입력해주세요"
-        android:inputType="textPersonName"
+        android:privateImeOptions="defaultInputmode=Korean"
+        android:inputType="textShortMessage"
         android:textAlignment="viewEnd"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -156,27 +157,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:backgroundTint="@color/TeamColor"
+        android:backgroundTint="#6D9773"
         android:text="추가하기"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/R_ClosingDateBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
-        android:elevation="0dp"
-        app:backgroundTint="#00000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.294"
-        app:layout_constraintStart_toEndOf="@+id/R_ClosingDate"
-        app:layout_constraintTop_toBottomOf="@+id/R_RoleBtn"
-        app:rippleColor="#FFFFFF"
-        app:srcCompat="@drawable/ic_baseline_arrow_forward_ios_24" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/R_RoleBtn"
@@ -188,5 +175,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/R_Role"
         app:srcCompat="@drawable/ic_baseline_add_24" />
+
+    <Button
+        android:id="@+id/R_ClosingDateBtn"
+        android:layout_width="63dp"
+        android:layout_height="30dp"
+        android:layout_marginBottom="84dp"
+        android:background="@drawable/ic_baseline_arrow_forward_ios_24"
+        app:layout_constraintBottom_toTopOf="@+id/R_ClosingTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/R_ClosingDate" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
