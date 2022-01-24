@@ -25,20 +25,20 @@ class MainActivity2 : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.action_matching -> {
-                    val settingFragment = Fragment_matching()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, settingFragment).commit()
+                    val matchingFragment = Fragment_matching()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, matchingFragment).commit()
                 }
                 R.id.action_mypage -> {
-                    val boardFragment = Fragment_mypage()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, boardFragment).commit()
+                    val mypageFragment = Fragment_mypage()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, mypageFragment).commit()
                 }
                 R.id.action_calendar -> {
-                    val settingFragment = Fragment_calendar()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, settingFragment).commit()
+                    val calendarFragment = Fragment_calendar()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, calendarFragment).commit()
                 }
                 R.id.action_map -> {
-                    val boardFragment = Fragment_map()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, boardFragment).commit()
+                    val mapFragment = Fragment_map()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, mapFragment).commit()
                 }
             }
             true
