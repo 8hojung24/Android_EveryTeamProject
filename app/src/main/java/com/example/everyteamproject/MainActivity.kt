@@ -1,5 +1,8 @@
 package com.example.everyteamproject
 
+import android.annotation.SuppressLint
+import android.app.Application
+import android.content.ClipData
 import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
@@ -8,6 +11,8 @@ import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.kakao.sdk.common.KakaoSdk
 import com.kakao.sdk.common.util.Utility
 
 
@@ -25,7 +30,9 @@ class MainActivity : AppCompatActivity() {
     lateinit var btnFour: Button
     lateinit var btnFive: Button
     lateinit var btnSix: Button
+    lateinit var backgroundText: TextView
 
+    @SuppressLint("WrongViewCast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         btnFour = findViewById(R.id.btnFour)
         btnFive = findViewById(R.id.btnFive)
         btnSix = findViewById(R.id.btnSix)
+        backgroundText = findViewById(R.id.backgroundText)
 
         // 카카오 로그인 hash 키
         val keyHash = Utility.getKeyHash(this)
@@ -67,6 +75,11 @@ class MainActivity : AppCompatActivity() {
         // 추가 버튼 클릭시 Registration 로 이동
         addButton.setOnClickListener {
             val intent = Intent(this@MainActivity, Registration::class.java)
+            startActivity(intent)
+        }
+
+        backgroundText.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity2::class.java)
             startActivity(intent)
         }
 
@@ -135,14 +148,3 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-
-/*
-// LoginActivity.kt로 class 이동
-// 카카오 로그인
-class GlobalApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        KakaoSdk.init(this, "1bb17a51c07ce090a59cb0cf97c10379")
-    }
-}*/

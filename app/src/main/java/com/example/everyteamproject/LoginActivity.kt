@@ -18,6 +18,7 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
+
         // 로그인 정보 확인
         UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
             if (error != null) {
@@ -88,6 +89,7 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 }
+
 
 
 // 카카오 로그인
