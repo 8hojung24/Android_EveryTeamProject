@@ -25,8 +25,11 @@ class MainActivity2 : AppCompatActivity() {
                     startActivity(intent)
                 }
                 R.id.action_matching -> {
-                    val matchingFragment = Fragment_matching()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, matchingFragment).commit()
+                    val intent = Intent(this@MainActivity2, MatchActivity::class.java)
+                    startActivity(intent)
+
+                    /*val matchingFragment = Fragment_matching()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, matchingFragment).commit()*/
                 }
                 R.id.action_mypage -> {
                     val mypageFragment = Fragment_mypage()
@@ -37,8 +40,11 @@ class MainActivity2 : AppCompatActivity() {
                     supportFragmentManager.beginTransaction().replace(R.id.main_frame, calendarFragment).commit()
                 }
                 R.id.action_map -> {
-                    val mapFragment = Fragment_map()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, mapFragment).commit()
+                    val intent = Intent(this@MainActivity2, MapActivity::class.java)
+                    startActivity(intent)
+
+                    /*val mapFragment = Fragment_map()
+                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, mapFragment).commit()*/
                 }
             }
             true

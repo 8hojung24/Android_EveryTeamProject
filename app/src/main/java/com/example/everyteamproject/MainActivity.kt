@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.util.Log
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kakao.sdk.common.util.Utility
+import com.kakao.sdk.user.UserApiClient
 
 
 /* <solid android:color="#6D9773" /> // 배경색 */
@@ -71,6 +72,12 @@ class MainActivity : AppCompatActivity() {
         addButton.setOnClickListener {
             val intent = Intent(this@MainActivity, Registration::class.java)
             startActivity(intent)
+        }
+
+        //카카오톡 닉네임으로 설정
+        val nickname = findViewById<TextView>(R.id.name) // 로그인 버튼
+        UserApiClient.instance.me { user, error ->
+            nickname.text = "${user?.kakaoAccount?.profile?.nickname}"
         }
 
         // MainActivity 초록색 박스 클릭시 MainActivity2 로 이동
@@ -149,14 +156,3 @@ class MainActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 }
-
-/*
-// LoginActivity.kt로 class 이동
-// 카카오 로그인
-class GlobalApplication : Application() {
-    override fun onCreate() {
-        super.onCreate()
-
-        KakaoSdk.init(this, "1bb17a51c07ce090a59cb0cf97c10379")
-    }
-}*/

@@ -1,11 +1,14 @@
 package com.example.everyteamproject
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.Toast
+import com.kakao.sdk.user.UserApiClient
 
 @Suppress("DEPRECATION")
 class SetActivity : AppCompatActivity() {
@@ -36,9 +39,17 @@ class SetActivity : AppCompatActivity() {
 
         // 로그아웃 버튼 클릭시 LoginActivity 로 이동
         logout.setOnClickListener {
-            val intent = Intent(this@SetActivity, LoginActivity::class.java)
-            startActivity(intent)
-        }
+            UserApiClient.instance.logout {error ->
+                if(error!=null){
+                    Toast.makeText(this, "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
+                }else {
+                    Toast.makeText(this, "로그아웃 성공", Toast.LENGTH_SHORT).show()
+                }
+                val intent = Intent(this, LoginActivity::class.java)
+                startActivity(intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP))
+                finish()
+                }
+            }
 
         // 피드백 버튼 클릭시 FeedbackActivity 로 이동
         feedback.setOnClickListener {
