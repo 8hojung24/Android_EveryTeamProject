@@ -1,10 +1,11 @@
-package com.example.everyteamproject
+//package com.example.everyteamproject
 
 import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_role_dialog.*
+import com.example.everyteamproject.R
 
 class CustomDialog(context: Context)
 {
@@ -18,7 +19,7 @@ class CustomDialog(context: Context)
 
     fun showDialog()
     {
-        dialog.setContentView(R.layout.custom_dialog)
+        dialog.setContentView(R.layout.activity_role_dialog) //여기확인-Okay
         dialog.window!!.setLayout(WindowManager.LayoutParams.WRAP_CONTENT, WindowManager.LayoutParams.WRAP_CONTENT)
         dialog.setCanceledOnTouchOutside(true)
         dialog.setCancelable(true)
