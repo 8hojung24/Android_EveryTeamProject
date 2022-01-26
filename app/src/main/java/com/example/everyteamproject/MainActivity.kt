@@ -1,110 +1,192 @@
 package com.example.everyteamproject
 
+import android.Manifest
+import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import android.util.Log
+import androidx.core.view.ViewCompat
+import androidx.viewpager2.adapter.FragmentStateAdapter
+import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kakao.sdk.common.util.Utility
+import me.relex.circleindicator.CircleIndicator3
 
 
 /* <solid android:color="#6D9773" /> // 배경색 */
+
+private val mPager: ViewPager2? = null
+private var pagerAdapter: FragmentStateAdapter? = null
+private const val num_page = 6
+private val mIndicator: CircleIndicator3? = null
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
 
     lateinit var mainView: View
-    lateinit var addButton: Button
     lateinit var calendarView: CalendarView
-    lateinit var btnOne: Button
-    lateinit var btnTwo: Button
-    lateinit var btnThree: Button
-    lateinit var btnFour: Button
-    lateinit var btnFive: Button
-    lateinit var btnSix: Button
-    lateinit var backgroundText: TextView
+    lateinit var profileImg: ImageView
+    lateinit var viewpager: ViewPager2
+    lateinit var indicator: CircleIndicator3
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         mainView = findViewById(R.id.mainView)
-        addButton = findViewById(R.id.addButton)
         calendarView = findViewById(R.id.calendarView)
-        btnOne = findViewById(R.id.btnOne)
-        btnTwo = findViewById(R.id.btnTwo)
-        btnThree = findViewById(R.id.btnThree)
-        btnFour = findViewById(R.id.btnFour)
-        btnFive = findViewById(R.id.btnFive)
-        btnSix = findViewById(R.id.btnSix)
-        backgroundText = findViewById(R.id.backgroundText)
+        profileImg = findViewById(R.id.profileImg)
+        viewpager = findViewById(R.id.viewpager)
+        indicator = findViewById(R.id.indicator)
+
+        pagerAdapter = MyAdapter(this, num_page)
+        viewpager.setAdapter(pagerAdapter)
+
+        indicator.setViewPager(viewpager)
+        indicator.createIndicators(num_page, 0)
+
+        viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
+        viewpager.setCurrentItem(1000)
+        viewpager.setOffscreenPageLimit(3)
+
+        viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
+            override fun onPageSelected(position: Int) {
+                super.onPageSelected(position)
+            }
+
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int
+            ) {
+                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
+                indicator.animatePageSelected(position%num_page)
+            }
+        })
+
+        val pageMargin: Int = resources.getDimensionPixelOffset(R.dimen.pageMargin)
+        val pageOffset: Int = resources.getDimensionPixelOffset(R.dimen.offset)
+
+        viewpager.setPageTransformer(object: ViewPager2.OnPageChangeCallback(),
+            ViewPager2.PageTransformer {
+            override fun transformPage(page: View, position: Float) {
+                val myOffset: Float = position * -(2 * pageOffset + pageMargin)
+                if(viewpager.orientation == ViewPager2.ORIENTATION_HORIZONTAL) {
+                    if(ViewCompat.getLayoutDirection(viewpager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+                        page.setTranslationX(-myOffset)
+                    } else {
+                        page.setTranslationX(myOffset)
+                    }
+                } else {
+                    page.setTranslationY(myOffset)
+                }
+            }
+
+        })
 
         // 카카오 로그인 hash 키
         val keyHash = Utility.getKeyHash(this)
         Log.d("Hash", keyHash)
 
-        /*
-        calendarView.setOnDateChangeListener { view, year, month, dayOfMonth ->
-// 달력 날짜가 선택되면
-            diaryTextView.visibility = View.VISIBLE // 해당 날짜가 뜨는 textView가 Visible
-            save_Btn.visibility = View.VISIBLE // 저장 버튼이 Visible
-            contextEditText.visibility = View.VISIBLE // EditText가 Visible
-            textView2.visibility = View.INVISIBLE // 저장된 일기 textView가 Invisible
-            cha_Btn.visibility = View.INVISIBLE // 수정 Button이 Invisible
-            del_Btn.visibility = View.INVISIBLE // 삭제 Button이 Invisible
 
-            diaryTextView.text = String.format("%d / %d / %d", year, month + 1, dayOfMonth)
-// 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
-            contextEditText.setText("") // EditText에 공백값 넣기
-
-            checkedDay(year, month, dayOfMonth) // checkedDay 메소드 호출
-
-
+        // 프로필 사진 설정
+        profileImg.setOnClickListener {
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                if(checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)==
+                        PackageManager.PERMISSION_DENIED) {
+                    val permissions = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    requestPermissions(permissions, PERMISSION_CODE)
+                }
+                else {
+                    pickImageFromGallery()
+                }
+            }
+            else {
+                pickImageFromGallery()
+            }
         }
-        */
-
-        // 추가 버튼 클릭시 Registration 로 이동
-        addButton.setOnClickListener {
-            val intent = Intent(this@MainActivity, Registration::class.java)
-            startActivity(intent)
-        }
-
-        // MainActivity 초록색 박스 클릭시 MainActivity2 로 이동
-        backgroundText.setOnClickListener {
-            val intent = Intent(this@MainActivity, MainActivity2::class.java)
-            startActivity(intent)
-        }
-
-        btnOne.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_one()) .commit()
-        }
-
-        btnTwo.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_two()) .commit()
-        }
-
-        btnThree.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_three()) .commit()
-        }
-
-        btnFour.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_four()) .commit()
-        }
-
-        btnFive.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_five()) .commit()
-        }
-
-        btnSix.setOnClickListener {
-            supportFragmentManager.beginTransaction() .replace(R.id.mainView, Fragment_six()) .commit()
-        }
-
     }
 
+
+    class ZoomOutPageTransformer : ViewPager2.PageTransformer {
+
+        override fun transformPage(view: View, position: Float) {
+            view.apply {
+                val pageWidth = width
+                val pageHeight = height
+                when {
+                    position < -1 -> { // [-Infinity,-1)
+                        // This page is way off-screen to the left.
+                        alpha = 0f
+                    }
+                    position <= 1 -> { // [-1,1]
+                        // Modify the default slide transition to shrink the page as well
+                        val scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position))
+                        val vertMargin = pageHeight * (1 - scaleFactor) / 2
+                        val horzMargin = pageWidth * (1 - scaleFactor) / 2
+                        translationX = if (position < 0) {
+                            horzMargin - vertMargin / 2
+                        } else {
+                            horzMargin + vertMargin / 2
+                        }
+
+                        // Scale the page down (between MIN_SCALE and 1)
+                        scaleX = scaleFactor
+                        scaleY = scaleFactor
+
+                        // Fade the page relative to its size.
+                        alpha = (MIN_ALPHA +
+                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
+                    }
+                    else -> { // (1,+Infinity]
+                        // This page is way off-screen to the right.
+                        alpha = 0f
+                    }
+                }
+            }
+        }
+    }
+
+    // 프로필 사진 설정
+    private fun pickImageFromGallery() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_CODE)
+    }
+    companion object {
+        private val IMAGE_PICK_CODE = 1000
+        private val PERMISSION_CODE = 1001
+        private const val MIN_SCALE = 0.85f
+        private const val MIN_ALPHA = 0.5f
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode) {
+            PERMISSION_CODE -> {
+                if(grantResults.size >0 && grantResults[0] ==
+                        PackageManager.PERMISSION_GRANTED){
+                    pickImageFromGallery()
+                }
+                else {
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if(resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            profileImg.setImageURI(data?.data)
+        }
+    }
 
     // 하단 소프트키 없애기 (몰입모드)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
