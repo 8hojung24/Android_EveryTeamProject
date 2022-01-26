@@ -65,6 +65,7 @@
         android:id="@+id/view6"
         android:layout_width="match_parent"
         android:layout_height="2px"
+        android:background="#8C9191"
         app:layout_constraintBottom_toTopOf="@+id/ScheduleTitle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -88,6 +89,7 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
+        android:background="#8C9191"
         app:layout_constraintBottom_toTopOf="@+id/Date"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -108,9 +110,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Date" />
 
+    <TextView
+        android:id="@+id/closingTime1"
+        android:layout_width="116dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="344dp"
+        android:background="#D6D3D3"
+        android:hint="9:00"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/closingTime2"
+        android:layout_width="116dp"
+        android:layout_height="31dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="344dp"
+        android:background="#D6D3D3"
+        android:hint="10:00"
+        android:textAlignment="center"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <View
         android:layout_width="match_parent"
         android:layout_height="2px"
+        android:background="#8C9191"
         app:layout_constraintBottom_toTopOf="@+id/Time"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -135,28 +164,27 @@
         android:id="@+id/ShowDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="252dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="420dp"
         android:text="날짜"
         android:textAlignment="textEnd"
-        app:layout_constraintStart_toEndOf="@+id/Date"
-        app:layout_constraintTop_toBottomOf="@+id/view6" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/ChooseDate"
         android:layout_width="40dp"
         android:layout_height="48dp"
-        android:layout_marginTop="12dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="404dp"
         android:background="@drawable/ic_baseline_arrow_forward_ios_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.483"
-        app:layout_constraintStart_toEndOf="@+id/ShowDate"
-        app:layout_constraintTop_toBottomOf="@+id/view6" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/addShedule"
-        android:layout_width="341dp"
-        android:layout_height="39dp"
+        android:layout_width="340dp"
+        android:layout_height="51dp"
         android:layout_marginBottom="8dp"
         android:backgroundTint="#6D9773"
         android:text="추가하기"
@@ -164,5 +192,17 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="140dp"
+        android:layout_marginBottom="352dp"
+        android:text="~"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,6 +2,7 @@ package com.example.everyteamproject
 
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
+import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,15 +16,28 @@ import java.util.*
 class Schedule_registration : AppCompatActivity() {
     var dateString = ""
     var timeString = ""
+    lateinit var back: Button
     lateinit var ChooseDate: Button
     lateinit var ShowDate: TextView
+    lateinit var closingTime1: TextView
+    lateinit var closingTime2: TextView
+
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule_registration)
 
+        back = findViewById<Button>(R.id.back)
         ChooseDate = findViewById<Button>(R.id.ChooseDate)
         ShowDate = findViewById<TextView>(R.id.ShowDate)
+        closingTime1 = findViewById<TextView>(R.id.closingTime1)
+        closingTime2 = findViewById<TextView>(R.id.closingTime2)
+
+        // 수정 필요
+//        back.setOnClickListener {
+//            val intent = Intent(this, Fragment_calendar::class.java)
+//            startActivity(intent)
+//        }
 
         ChooseDate.setOnClickListener {
             val cal = Calendar.getInstance()
@@ -41,6 +55,26 @@ class Schedule_registration : AppCompatActivity() {
 //           최소 날짜를 현재 시각 이후로
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
             dpd.show()
+        }
+
+        closingTime1.setOnClickListener{
+            val cal = Calendar.getInstance()
+            var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                timeString = "${hourOfDay}"+":"+"${minute}"
+                closingTime1.text = dateString
+                closingTime1.text = timeString
+            }
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
+        }
+
+        closingTime2.setOnClickListener{
+            val cal = Calendar.getInstance()
+            var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
+                timeString = "${hourOfDay}"+":"+"${minute}"
+                closingTime2.text = dateString
+                closingTime2.text = timeString
+            }
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
         }
     }
 }
