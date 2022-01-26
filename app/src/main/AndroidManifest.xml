@@ -12,7 +12,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.모두의팀플">
-        <activity android:name=".RoleDialog"></activity>
         <!-- 시작페이지 설정. 작업시 변경 후 push하기 전에 원래대로 -->
         <activity android:name=".LoginActivity">
             <!-- 시작페이지-->
@@ -45,6 +44,7 @@
         <activity android:name=".Edit" />
         <activity android:name=".MatchActivity" />
         <activity android:name=".MapActivity" />
+        <activity android:name=".RoleDialog"/>
     </application>
 
 </manifest>
