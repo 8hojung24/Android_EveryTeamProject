@@ -13,9 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.모두의팀플">
-        <!-- 시작페이지 설정. 작업시 변경 후 push하기 전에 원래대로 -->
+        <activity android:name=".Schedule_memo"></activity>
+        <activity android:name=".Schedule_Edit" /> <!-- 시작페이지 설정. 작업시 변경 후 push하기 전에 원래대로 -->
         <activity android:name=".LoginActivity">
-            <!-- 시작페이지-->
+
+            <!-- 시작페이지 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,8 +47,8 @@
         <activity android:name=".Edit" />
         <activity android:name=".MatchActivity" />
         <activity android:name=".MapActivity" />
-        <activity android:name=".RoleDialog"/>
-        <activity android:name=".Schedule_registration"/>
+        <activity android:name=".RoleDialog" />
+        <activity android:name=".Schedule_registration" />
     </application>
 
 </manifest>

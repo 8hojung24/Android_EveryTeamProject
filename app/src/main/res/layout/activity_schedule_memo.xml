@@ -2,10 +2,9 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/title"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Schedule_registration">
+    tools:context=".Schedule_memo">
 
     <Button
         android:id="@+id/back"
@@ -24,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="일정 등록"
+        android:text="메모"
         android:textAlignment="center"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -70,137 +69,79 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Memo"
+        app:layout_constraintTop_toBottomOf="@+id/TitleView"
         app:layout_constraintVertical_bias="0.505" />
 
     <TextView
-        android:id="@+id/Memo"
+        android:id="@+id/TitleView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="48dp"
-        android:text="Date"
+        android:text="Memo"
         android:textColor="@color/TeamColor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/MemoTitle" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="#8C9191"
-        app:layout_constraintBottom_toTopOf="@+id/Memo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Time"
-        app:layout_constraintVertical_bias="0.505" />
 
-    <TextView
-        android:id="@+id/Time"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
-        android:text="Time"
-        android:textColor="@color/TeamColor"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Memo" />
-
-    <TextView
-        android:id="@+id/closingTime1"
-        android:layout_width="116dp"
-        android:layout_height="31dp"
-        android:layout_marginEnd="164dp"
-        android:layout_marginBottom="344dp"
-        android:background="#D6D3D3"
-        android:hint="9:00"
-        android:textAlignment="center"
-        android:textSize="18dp"
+    <EditText
+        android:id="@+id/Memo"
+        android:layout_width="378dp"
+        android:layout_height="424dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="108dp"
+        android:background="@null"
+        android:ems="10"
+        android:hint="내용을 입력하세요"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <TextView
-        android:id="@+id/closingTime2"
-        android:layout_width="116dp"
-        android:layout_height="31dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginBottom="344dp"
-        android:background="#D6D3D3"
-        android:hint="10:00"
-        android:textAlignment="center"
-        android:textSize="18dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2px"
-        android:background="#8C9191"
-        app:layout_constraintBottom_toTopOf="@+id/Time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Place"
-        app:layout_constraintVertical_bias="0.505" />
-
-    <TextView
-        android:id="@+id/Place"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="48dp"
-        android:text="Place"
-        android:textColor="@color/TeamColor"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Time" />
-
-    <TextView
-        android:id="@+id/ShowDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="76dp"
-        android:layout_marginBottom="420dp"
-        android:text="날짜"
-        android:textAlignment="textEnd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/ChooseDate"
-        android:layout_width="40dp"
-        android:layout_height="48dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="404dp"
-        android:background="@drawable/ic_baseline_arrow_forward_ios_24"
+        android:id="@+id/delBtn"
+        android:layout_width="63dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/ic_baseline_delete_24"
+        android:backgroundTint="@color/TeamColor"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/addShedule"
-        android:layout_width="340dp"
-        android:layout_height="51dp"
-        android:layout_marginBottom="8dp"
-        android:backgroundTint="#6D9773"
-        android:text="추가하기"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView9"
+        android:id="@+id/textView10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="140dp"
-        android:layout_marginBottom="352dp"
-        android:text="~"
-        android:textSize="16sp"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="8dp"
+        android:text="삭제"
+        android:textColor="@color/TeamColor"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/saveBtn"
+        android:layout_width="60dp"
+        android:layout_height="56dp"
+        android:layout_marginEnd="36dp"
+        android:layout_marginBottom="34dp"
+        android:background="@drawable/ic_baseline_save_alt_24"
+        android:backgroundTint="@color/TeamColor"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="8dp"
+        android:text="저장"
+        android:textColor="@color/TeamColor"
+        android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
