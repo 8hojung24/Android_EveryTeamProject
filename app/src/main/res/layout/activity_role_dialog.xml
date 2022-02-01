@@ -24,13 +24,17 @@
             android:id="@+id/cancel_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="취소" />
+            android:backgroundTint="#6D9773"
+            android:text="취소"
+            android:textColor="@color/white" />
 
         <Button
             android:id="@+id/finish_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="완료" />
+            android:backgroundTint="#6D9773"
+            android:text="완료"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
 </LinearLayout>
