@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.everyteamproject">
+
     <!-- 인터넷 사용 권한 설정 -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -13,21 +14,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.모두의팀플">
-        <activity android:name=".Schedule_memo"></activity>
-        <activity android:name=".Schedule_Edit" /> <!-- 시작페이지 설정. 작업시 변경 후 push하기 전에 원래대로 -->
-        <activity android:name=".LoginActivity">
 
-            <!-- 시작페이지 -->
+        <!-- 시작페이지 설정. 작업시 변경 후 push하기 전에 원래대로 -->
+        <activity android:name=".Schedule_memo" />
+        <activity android:name=".Schedule_Edit"/>
+        <activity android:name=".LoginActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+        <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -38,7 +39,7 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".MainActivity2" />
-        <activity android:name=".Registration" />
+        <activity android:name=".Registration"/>
         <activity android:name=".IntroActivity" />
         <activity android:name=".SetActivity" />
         <activity android:name=".FeedbackActivity" />
@@ -47,8 +48,8 @@
         <activity android:name=".Edit" />
         <activity android:name=".MatchActivity" />
         <activity android:name=".MapActivity" />
-        <activity android:name=".RoleDialog" />
-        <activity android:name=".Schedule_registration" />
+        <activity android:name=".Schedule_registration"/>
+
     </application>
 
 </manifest>
