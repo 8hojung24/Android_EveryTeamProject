@@ -8,19 +8,23 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.CalendarView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.RecyclerView
+import com.example.everyteamproject.com.example.everyteamproject.DBHelper
+import com.example.everyteamproject.com.example.everyteamproject.ScheduleItem
 import java.util.*
 
 
 class Fragment_calendar : Fragment() {
-    var fname: String = ""
-    var str: String = ""
 
     lateinit var calendarView: CalendarView
     lateinit var selectedDate: TextView
     lateinit var save_Btn: Button
     lateinit var printSchedule: TextView
+
+    lateinit var rv_todo: RecyclerView
+    lateinit var mDBHelper: DBHelper
+    lateinit var ScheduleItems : MutableList<ScheduleItem>
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -28,7 +32,10 @@ class Fragment_calendar : Fragment() {
         calendarView = view.findViewById(R.id.calendarView)
         selectedDate = view.findViewById(R.id.selectedDate)
         save_Btn = view.findViewById(R.id.save_Btn)
-        printSchedule = view.findViewById(R.id.printSchedule)
+
+        rv_todo = view.findViewById(R.id.rv_todo)
+        mDBHelper = DBHelper(context)
+        ScheduleItems = mutableListOf<ScheduleItem>()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,12 +54,12 @@ class Fragment_calendar : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        //var date: Date? = null
+        var date: Date? = null
         val v = context?.let { CalendarView(it) }
         v?.setOnDateChangeListener { view, year, month, dayOfMonth ->
             selectedDate.visibility = View.VISIBLE // 해당 날짜가 뜨는 textView가 Visible
             save_Btn.visibility = View.VISIBLE // 저장 버튼이 Visible
-            printSchedule.visibility = View.INVISIBLE // 저장된 일정 textView가 Invisible
+            printSchedule.visibility = View.VISIBLE // 저장된 일정 textView가 Invisible
 
             selectedDate.text = String.format(
                     "%d / %d / %d",
@@ -60,7 +67,7 @@ class Fragment_calendar : Fragment() {
                     month + 1,
                     dayOfMonth
             )  // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
-            //date = Date(year, month, dayOfMonth)
+            date = Date(year, month, dayOfMonth)
         }
 //        val myView: View = inflater.inflate(R.layout.fragment_one, container, false)
 //        val mybutton: Button = myView.findViewById(R.id.save_Btn)

@@ -6,49 +6,67 @@ import android.content.Intent
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.DatePicker
-import android.widget.TextView
+import android.widget.*
 import androidx.annotation.RequiresApi
+import com.example.everyteamproject.com.example.everyteamproject.CustomAdapter
+import com.example.everyteamproject.com.example.everyteamproject.DBHelper
+import com.example.everyteamproject.com.example.everyteamproject.ScheduleItem
 import java.text.SimpleDateFormat
 import java.util.*
 
 class Schedule_registration : AppCompatActivity() {
+    var fname: String = ""
     var dateString = ""
     var timeString = ""
-    lateinit var back: Button
-    lateinit var ChooseDate: Button
+
+    lateinit var Title: EditText
     lateinit var ShowDate: TextView
     lateinit var closingTime1: TextView
     lateinit var closingTime2: TextView
+
+    lateinit var back: Button
+    lateinit var ChooseDate: Button
+    lateinit var addShedule: Button
+
+    lateinit var mDBHelper: DBHelper
+    lateinit var ScheduleItems : MutableList<ScheduleItem>
+    lateinit var mAdapter: CustomAdapter
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule_registration)
 
-        back = findViewById<Button>(R.id.back)
-        ChooseDate = findViewById<Button>(R.id.ChooseDate)
+        Title = findViewById<EditText>(R.id.Title)
         ShowDate = findViewById<TextView>(R.id.ShowDate)
         closingTime1 = findViewById<TextView>(R.id.closingTime1)
         closingTime2 = findViewById<TextView>(R.id.closingTime2)
+        back = findViewById<Button>(R.id.back)
+        ChooseDate = findViewById<Button>(R.id.ChooseDate)
+        addShedule = findViewById<Button>(R.id.addShedule)
 
-        // 수정 필요
-//        back.setOnClickListener {
-//            val intent = Intent(this, Fragment_calendar::class.java)
-//            startActivity(intent)
-//        }
+        mDBHelper = DBHelper(this)
+        ScheduleItems = mutableListOf<ScheduleItem>()
+
+        // loadRecentDB()
+
+        // 뒤로가기 버튼 수정 필요
+        back.setOnClickListener {
+            val intent = Intent(this, Fragment_calendar::class.java)
+            startActivity(intent)
+        }
 
         ChooseDate.setOnClickListener {
             val cal = Calendar.getInstance()
 
-            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
+            val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth -> // 달력 날짜가 선택되면
                 cal.set(year, month, dayOfMonth)
                 val Date = cal.time
                 val Simpledateformat = SimpleDateFormat("EEEE", Locale.getDefault())
                 val DayName: String = Simpledateformat.format(Date)
                 dateString = "${month+1}.${dayOfMonth}($DayName)"
-                ShowDate.text = dateString
+                ShowDate.text = dateString // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
+
             }
             val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
 
@@ -61,7 +79,6 @@ class Schedule_registration : AppCompatActivity() {
             val cal = Calendar.getInstance()
             var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                 timeString = "${hourOfDay}"+":"+"${minute}"
-                closingTime1.text = dateString
                 closingTime1.text = timeString
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
@@ -71,10 +88,26 @@ class Schedule_registration : AppCompatActivity() {
             val cal = Calendar.getInstance()
             var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                 timeString = "${hourOfDay}"+":"+"${minute}"
-                closingTime2.text = dateString
                 closingTime2.text = timeString
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
         }
+
+        // 저장 Button이 클릭되면
+        addShedule.setOnClickListener {
+            //Insert Database
+            mDBHelper.Insert(Title.text.toString(), ShowDate.text.toString(), closingTime1.text.toString(), closingTime2.text.toString(), "장소")
+            Toast.makeText(applicationContext, "입력됨", Toast.LENGTH_SHORT).show()
+
+            // Insert UI
+        }
+
     }
+
+//    private fun loadRecentDB() {
+//        // 저장되어있던 DB를 가져온다.
+//        ScheduleItems = mDBHelper.getScheduleList()
+//        if (mAdapter == null)
+//            mAdapter = CustomAdapter(ScheduleItems, this)
+//    }
 }
