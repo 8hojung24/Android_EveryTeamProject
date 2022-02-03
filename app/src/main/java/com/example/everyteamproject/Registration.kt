@@ -5,7 +5,6 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Build
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
