@@ -12,21 +12,11 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.viewpager2.adapter.FragmentStateAdapter
-import androidx.viewpager2.widget.ViewPager2
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.kakao.sdk.common.util.Utility
-import me.relex.circleindicator.CircleIndicator3
 import com.kakao.sdk.user.UserApiClient
 
 
 /* <solid android:color="#6D9773" /> // 배경색 */
-
-private val mPager: ViewPager2? = null
-private var pagerAdapter: FragmentStateAdapter? = null
-private const val num_page = 6
-private val mIndicator: CircleIndicator3? = null
 
 @Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity() {
@@ -34,8 +24,8 @@ class MainActivity : AppCompatActivity() {
     lateinit var mainView: View
     lateinit var calendarView: CalendarView
     lateinit var profileImg: ImageView
-    lateinit var viewpager: ViewPager2
-    lateinit var indicator: CircleIndicator3
+    lateinit var addButton:Button
+    lateinit var backgroundText: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,66 +34,24 @@ class MainActivity : AppCompatActivity() {
         mainView = findViewById(R.id.mainView)
         calendarView = findViewById(R.id.calendarView)
         profileImg = findViewById(R.id.profileImg)
-        viewpager = findViewById(R.id.viewpager)
-        indicator = findViewById(R.id.indicator)
+        addButton = findViewById(R.id.addButton)
+        backgroundText = findViewById(R.id.backgroundText)
 
-        pagerAdapter = MyAdapter(this, num_page)
-        viewpager.setAdapter(pagerAdapter)
+        addButton.setOnClickListener{
+            val intent = Intent(this@MainActivity, MainActivity2::class.java)
+            startActivity(intent)
+        }
 
-        indicator.setViewPager(viewpager)
-        indicator.createIndicators(num_page, 0)
-
-        viewpager.setOrientation(ViewPager2.ORIENTATION_HORIZONTAL)
-        viewpager.setCurrentItem(1000)
-        viewpager.setOffscreenPageLimit(3)
-
-        viewpager.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageSelected(position: Int) {
-                super.onPageSelected(position)
-            }
-
-            override fun onPageScrolled(
-                position: Int,
-                positionOffset: Float,
-                positionOffsetPixels: Int
-            ) {
-                super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-                indicator.animatePageSelected(position%num_page)
-            }
-        })
-
-        val pageMargin: Int = resources.getDimensionPixelOffset(R.dimen.pageMargin)
-        val pageOffset: Int = resources.getDimensionPixelOffset(R.dimen.offset)
-
-        viewpager.setPageTransformer(object: ViewPager2.OnPageChangeCallback(),
-            ViewPager2.PageTransformer {
-            override fun transformPage(page: View, position: Float) {
-                val myOffset: Float = position * -(2 * pageOffset + pageMargin)
-                if(viewpager.orientation == ViewPager2.ORIENTATION_HORIZONTAL) {
-                    if(ViewCompat.getLayoutDirection(viewpager) == ViewCompat.LAYOUT_DIRECTION_RTL) {
-                        page.setTranslationX(-myOffset)
-                    } else {
-                        page.setTranslationX(myOffset)
-                    }
-                } else {
-                    page.setTranslationY(myOffset)
-                }
-            }
-
-        })
+        backgroundText.setOnClickListener {
+            val intent = Intent(this@MainActivity, MainActivity2::class.java)
+            startActivity(intent)
+        }
 
         //카카오톡 닉네임으로 설정
         val nickname = findViewById<TextView>(R.id.name) // 로그인 버튼
         UserApiClient.instance.me { user, error ->
             nickname.text = "${user?.kakaoAccount?.profile?.nickname}"
         }
-
-        /*
-        // MainActivity 초록색 박스 클릭시 MainActivity2 로 이동
-        backgroundText.setOnClickListener {
-            val intent = Intent(this@MainActivity, MainActivity2::class.java)
-            startActivity(intent)
-        }*/
 
         // 카카오 로그인 hash 키
         val keyHash = Utility.getKeyHash(this)
@@ -126,47 +74,6 @@ class MainActivity : AppCompatActivity() {
                 pickImageFromGallery()
             }
         }
-    }
-
-
-    class ZoomOutPageTransformer : ViewPager2.PageTransformer {
-
-        override fun transformPage(view: View, position: Float) {
-            view.apply {
-                val pageWidth = width
-                val pageHeight = height
-                when {
-                    position < -1 -> { // [-Infinity,-1)
-                        // This page is way off-screen to the left.
-                        alpha = 0f
-                    }
-                    position <= 1 -> { // [-1,1]
-                        // Modify the default slide transition to shrink the page as well
-                        val scaleFactor = Math.max(MIN_SCALE, 1 - Math.abs(position))
-                        val vertMargin = pageHeight * (1 - scaleFactor) / 2
-                        val horzMargin = pageWidth * (1 - scaleFactor) / 2
-                        translationX = if (position < 0) {
-                            horzMargin - vertMargin / 2
-                        } else {
-                            horzMargin + vertMargin / 2
-                        }
-
-                        // Scale the page down (between MIN_SCALE and 1)
-                        scaleX = scaleFactor
-                        scaleY = scaleFactor
-
-                        // Fade the page relative to its size.
-                        alpha = (MIN_ALPHA +
-                                (((scaleFactor - MIN_SCALE) / (1 - MIN_SCALE)) * (1 - MIN_ALPHA)))
-                    }
-                    else -> { // (1,+Infinity]
-                        // This page is way off-screen to the right.
-                        alpha = 0f
-                    }
-                }
-            }
-        }
-
     }
 
     // 프로필 사진 설정
@@ -225,20 +132,10 @@ class MainActivity : AppCompatActivity() {
 
     // 설정 액션바 -> SetActivity   편집 액션바 -> Bottom_sheet_layout
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        val bottomSheetView = layoutInflater.inflate(R.layout.bottom_sheet_layout, null)
-        val bottomSheetDialog = BottomSheetDialog(this)
-        bottomSheetDialog.setContentView(bottomSheetView)
-
         when(item?.itemId){
             R.id.action_settings -> {
                 val intent = Intent(this@MainActivity, SetActivity::class.java)
                 startActivity(intent)
-                return true
-            }
-            R.id.action_edit -> {
-                bottomSheetDialog.show()
-                //val intent = Intent(this@MainActivity, Bottom_sheet_layout::class.java)
-                //startActivity(intent)
                 return true
             }
         }

@@ -39,10 +39,6 @@ class IntroActivity : AppCompatActivity() {
                 //mainView.display
                 return true
             }
-            R.id.action_edit -> {
-                //mainView.display
-                return true
-            }
         }
 
         return super.onOptionsItemSelected(item)

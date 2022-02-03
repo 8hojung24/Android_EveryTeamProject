@@ -1,13 +1,12 @@
-//package com.example.everyteamproject
+package com.example.everyteamproject
 
 import android.app.Dialog
 import android.content.Context
 import android.view.WindowManager
 import android.widget.EditText
 import kotlinx.android.synthetic.main.activity_role_dialog.*
-import com.example.everyteamproject.R
 
-class CustomDialog(context: Context)
+class RoleDialog(context: Context)
 {
     private val dialog = Dialog(context)
     private lateinit var onClickListener: OnDialogClickListener

@@ -13,9 +13,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.모두의팀플">
+        <activity android:name=".StudyGroup"></activity>
         <!-- 시작페이지 설정. 작업시 변경 후 push하기 전에 원래대로 -->
         <activity android:name=".LoginActivity">
-            <!-- 시작페이지-->
+
+            <!-- 시작페이지 -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -41,11 +43,9 @@
         <activity android:name=".SetActivity" />
         <activity android:name=".FeedbackActivity" />
         <activity android:name=".EvaluateActivity" />
-        <activity android:name=".EditActivity" />
-        <activity android:name=".Edit" />
         <activity android:name=".MatchActivity" />
         <activity android:name=".MapActivity" />
-        <activity android:name=".RoleDialog"/>
+        <activity android:name=".Edit"/>
     </application>
 
 </manifest>

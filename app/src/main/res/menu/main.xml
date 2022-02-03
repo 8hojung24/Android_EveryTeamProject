@@ -6,8 +6,4 @@
         android:icon="@drawable/ic_baseline_settings_24"
         android:title="Settings"
         app:showAsAction="always" />
-    <item
-        android:id="@+id/action_edit"
-        android:title="편집"
-        app:showAsAction="always" />
 </menu>
