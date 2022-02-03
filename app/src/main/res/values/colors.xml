@@ -8,4 +8,5 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="TeamColor">#107E2A</color>
+    <color name="ButtonColor">#6D9773</color>
 </resources>
