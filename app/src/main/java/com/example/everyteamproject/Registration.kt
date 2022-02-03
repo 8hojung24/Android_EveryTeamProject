@@ -3,15 +3,13 @@ package com.example.everyteamproject
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
-import android.os.Build
 import android.os.Bundle
 import android.widget.Button
-import android.widget.EditText
 import android.widget.TextView
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_registration.*
+import com.example.everyteamproject.com.example.everyteamproject.DataBaseHandler
+import com.example.everyteamproject.com.example.everyteamproject.project
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -19,26 +17,34 @@ import java.util.*
 class Registration : AppCompatActivity() {
     var dateString = ""
     var timeString = ""
-    lateinit var Project_db: Project_db
-    lateinit var sqlitedb: SQLiteDatabase
-    lateinit var R_DeadlineBtn: Button
-    lateinit var R_Deadline: TextView
-    lateinit var R_ClosingTime: TextView
-    lateinit var R_RoleBtn:Button
-    lateinit var R_Role:TextView
+    lateinit var mDataBaseHandler: DataBaseHandler
+    lateinit var projects: MutableList<project>
+    lateinit var ProjectName: TextView
+    lateinit var DeadlineBtn: Button
+    lateinit var Deadline: TextView
+    lateinit var ClosingTime: TextView
+    lateinit var EditBtn: TextView
+    lateinit var RoleBtn:Button
+    lateinit var Role:TextView
+    lateinit var back: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registration)
 
-        Project_db = Project_db(this, "MyDB", null, 1)
-        R_DeadlineBtn = findViewById(R.id.R_DeadlineBtn)
-        R_Deadline = findViewById(R.id.R_Deadline)
-        R_ClosingTime = findViewById(R.id.R_ClosingTime)
-        R_RoleBtn = findViewById(R.id.R_RoleBtn)
-        R_Role = findViewById(R.id.R_Role)
+        ProjectName = findViewById(R.id.ProjectName)
+        DeadlineBtn = findViewById(R.id.DeadlineBtn)
+        Deadline = findViewById(R.id.Deadline)
+        ClosingTime = findViewById(R.id.ClosingTime)
+        RoleBtn = findViewById(R.id.RoleBtn)
+        Role = findViewById(R.id.Role)
+        EditBtn = findViewById(R.id.EditBtn)
+        back = findViewById(R.id.back)
 
-        R_DeadlineBtn.setOnClickListener {
+        mDataBaseHandler = DataBaseHandler(this)
+        projects = mutableListOf<project>()
+
+        DeadlineBtn.setOnClickListener {
             val cal = Calendar.getInstance()
 
             val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
@@ -47,49 +53,50 @@ class Registration : AppCompatActivity() {
                 val Simpledateformat = SimpleDateFormat("EEEE", Locale.getDefault())
                 val DayName: String = Simpledateformat.format(Date)
                 dateString = "${month+1}.${dayOfMonth}($DayName)"
-                R_Deadline.text = dateString
+                Deadline.text = dateString
             }
-            val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
+            val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
 
 //           최소 날짜를 현재 시각 이후로
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
             dpd.show()
         }
 
-        R_ClosingTime.setOnClickListener{
+        ClosingTime.setOnClickListener{
             val cal = Calendar.getInstance()
             var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                 timeString = "${hourOfDay}"+":"+"${minute}"
-                R_ClosingTime.text = timeString
+                ClosingTime.text = timeString
             }
-            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
+            TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY),
+                    cal.get(Calendar.MINUTE), false).show()
         }
 
         //RoleDialog
-        R_RoleBtn.setOnClickListener {
+        RoleBtn.setOnClickListener {
             val dialog = RoleDialog(this)
             dialog.showDialog()
             dialog.setOnClickListener(object : RoleDialog.OnDialogClickListener {
                 override fun onClicked(name: String) {
-                    R_Role.text = name
+                    Role.text = name
                 }
             })
         }
 
         //DB
-        R_EditBtn.setOnClickListener {
-            var str_projectname: String = R_ProjectName.text.toString()
-            var str_role: String = R_Role.text.toString()
-            var str_deadline: String = R_Deadline.text.toString()
-            var str_closingtime: String = R_ClosingTime.text.toString()
+        EditBtn.setOnClickListener {
+            //Insert Database
+            mDataBaseHandler.Insert(ProjectName.text.toString(), Role.text.toString(), Deadline.text.toString(), ClosingTime.text.toString())
+            Toast.makeText(applicationContext, "추가되었습니다.", Toast.LENGTH_SHORT).show()
 
-            sqlitedb=Project_db.writableDatabase
-            sqlitedb.execSQL("INSERT INTO projects VALUES ('"+str_projectname+"', " +
-                    "'"+str_role+"', '"+str_deadline+"', '"+str_closingtime+"')")
-            sqlitedb.close()
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
 
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("intent_name", str_projectname)
+        }
+
+        back.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
         }
     }

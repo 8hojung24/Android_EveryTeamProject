@@ -25,7 +25,7 @@ class Schedule_Edit : AppCompatActivity() {
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_schedule_registration)
+        setContentView(R.layout.activity_schedule__edit)
 
         back = findViewById<Button>(R.id.back)
         ChooseDate = findViewById<Button>(R.id.ChooseDate)
