@@ -124,8 +124,8 @@ class Fragment_mypage : Fragment(), View.OnClickListener{
                 data?.add(Member(string))
                 adapter?.notifyDataSetChanged()*/
 
-                //val intent = Intent(getActivity(), Registration::class.java)
-                //startActivity(intent)
+                val intent = Intent(getActivity(), Registration::class.java)
+                startActivity(intent)
             }
         }
     }

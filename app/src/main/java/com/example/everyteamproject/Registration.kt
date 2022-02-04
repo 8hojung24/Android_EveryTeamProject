@@ -98,23 +98,18 @@ class Registration : AppCompatActivity() {
             mDataBaseHandler.Insert(ProjectName.text.toString(), Role.text.toString(), Deadline.text.toString(), ClosingTime.text.toString())
             Toast.makeText(applicationContext, "추가되었습니다.", Toast.LENGTH_SHORT).show()
 
-            val intent = Intent(this, MainActivity2::class.java)
-            startActivity(intent)
+            lateinit var binding : FragmentMypageBinding
+            var adapter: AdapterRecycler?=null
+            var data:MutableList<Member>?=mutableListOf()
 
-        }
-
-        var adapter: AdapterRecycler?=null
-        var data:MutableList<Member>?=mutableListOf()
-        lateinit var binding : FragmentMypageBinding
-
-        back.setOnClickListener {
-
-            //var tvid: TextView = TextView(this)
-            //tvid.text = personal_key
-
-            val intent = Intent(this, MainActivity2::class.java)
             val item = Member()
+
+            // 108~111 이 부분에서 db에 저장된 데이터가 업데이트 되어야 할 것 같습니다!
             item.name = ProjectName.text.toString()
+            item.role = Role.text.toString()
+            item.day = Deadline.text.toString()
+            item.time = ClosingTime.text.toString()
+
             data?.add(item)
             adapter?.notifyDataSetChanged()
 
@@ -124,6 +119,14 @@ class Registration : AppCompatActivity() {
             linearLayoutManager.orientation= RecyclerView.VERTICAL
             binding?.recyclerViewMain?.layoutManager = linearLayoutManager
             binding?.recyclerViewMain?.adapter = adapter
+
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+
+        }
+
+        back.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
         }
     }
