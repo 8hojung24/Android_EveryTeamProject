@@ -5,17 +5,19 @@ import android.app.TimePickerDialog
 import android.content.Intent
 import android.database.sqlite.SQLiteDatabase
 import android.os.Build
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.everyteamproject.com.example.everyteamproject.AdapterRecycler
 import kotlinx.android.synthetic.main.activity_registration.*
 import com.example.everyteamproject.com.example.everyteamproject.DataBaseHandler
 import com.example.everyteamproject.com.example.everyteamproject.project
+import com.example.everyteamproject.databinding.FragmentMypageBinding
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -101,8 +103,27 @@ class Registration : AppCompatActivity() {
 
         }
 
+        var adapter: AdapterRecycler?=null
+        var data:MutableList<Member>?=mutableListOf()
+        lateinit var binding : FragmentMypageBinding
+
         back.setOnClickListener {
+
+            //var tvid: TextView = TextView(this)
+            //tvid.text = personal_key
+
             val intent = Intent(this, MainActivity2::class.java)
+            val item = Member()
+            item.name = ProjectName.text.toString()
+            data?.add(item)
+            adapter?.notifyDataSetChanged()
+
+            adapter = AdapterRecycler(Fragment_mypage())
+            adapter!!.listData = data as ArrayList<Member>
+            var linearLayoutManager = LinearLayoutManager(this)
+            linearLayoutManager.orientation= RecyclerView.VERTICAL
+            binding?.recyclerViewMain?.layoutManager = linearLayoutManager
+            binding?.recyclerViewMain?.adapter = adapter
             startActivity(intent)
         }
     }

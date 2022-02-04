@@ -66,12 +66,14 @@ class Fragment_mypage : Fragment(), View.OnClickListener{
         return view2
     }
 
-    //추가
+    // 추가 format example
     fun init() {
 
         val item = Member()
-        item.name = "$i 번째 글 입니다."
+        item.name = "Team Project $i"
         i++
+        item.role = " xxx: 개발 \n xxx: 개발 \n xxx: 개발 \n xxx: 개발"
+        item.time = "2022년 2월 7일"
         data?.add(item)
         adapter?.notifyDataSetChanged()
 

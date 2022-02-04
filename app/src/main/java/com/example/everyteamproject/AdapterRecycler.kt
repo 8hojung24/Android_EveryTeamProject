@@ -33,8 +33,7 @@ class AdapterRecycler(private val context: Fragment_mypage):RecyclerView.Adapter
     }
 }
 
-class Holder(val binding: ActivityTodolistBinding) : RecyclerView.ViewHolder(binding.root),
-    View.OnClickListener {
+class Holder(val binding: ActivityTodolistBinding) : RecyclerView.ViewHolder(binding.root){
     private val mainActivity = Fragment_mypage.getInstance()
     //추가
     var context: Context?= null
@@ -52,6 +51,8 @@ class Holder(val binding: ActivityTodolistBinding) : RecyclerView.ViewHolder(bin
         this.mPosition = mPosition
         this.mMember = mMember
         binding.textView.setText(Member().name)
+        binding.textView2.setText(Member().role)
+        binding.textView3.setText(Member().time)
         //binding.executePendingBindings()
     }
 
@@ -59,23 +60,26 @@ class Holder(val binding: ActivityTodolistBinding) : RecyclerView.ViewHolder(bin
         binding.btnDelete.setOnClickListener {
             mainActivity?.deleteMember(mMember!!)
         }
-        binding.btnLink.setOnClickListener {
-            mainActivity?.goActivity()
-        }
         binding.btnEdit.setOnClickListener {
             mainActivity?.editMember()
         }
+        binding.viewGroup.setOnClickListener {
+            mainActivity?.goActivity()
+        }
         //추가
-        binding.viewGroup.setOnClickListener(this)
+        //binding.viewGroup.setOnClickListener(this)
         binding.textView.isClickable()
     }
 
     fun setData(member: Member, position: Int){
         binding.textView.text = member.name
+        binding.textView2.text = member.role
+        binding.textView3.text = member.time
         this.mMember = member
         this.mPosition = position
     }
 
+    /*
     // 추가
     override fun onClick(v: View){
         val id = v.id
@@ -86,5 +90,5 @@ class Holder(val binding: ActivityTodolistBinding) : RecyclerView.ViewHolder(bin
                 context?.startActivity(intent)
             }
         }
-    }
+    }*/
 }
