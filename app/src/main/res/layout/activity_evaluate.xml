@@ -4,6 +4,97 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00FFFFFF"
+    android:backgroundTint="#00E8D9D9"
     tools:context=".EvaluateActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="39dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="100dp"
+        android:background="#FFFFFF"
+        android:backgroundTint="#00FFFFFF"
+        android:src="@drawable/ic_baseline_thumb_up_alt_24"
+        app:layout_constraintBottom_toTopOf="@+id/evaluateEditText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="#6D9773" />
+
+    <Button
+        android:id="@+id/evaluateTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="78dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="179dp"
+        android:background="#00ff0000"
+        android:text="앱 평점주기 / 리뷰"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.421"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RatingBar
+        android:id="@+id/evaluateRb"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="20dp"
+        android:numStars="5"
+        android:progressTint="#FFEB3B"
+        android:rating="5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/evaluateTitle" />
+
+    <EditText
+        android:id="@+id/evaluateEditText"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="30dp"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="리뷰를 입력해주세요."
+        android:inputType="textMultiLine"
+        android:scrollbars="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/evaluateRb" />
+
+    <Button
+        android:id="@+id/evaluate_SubmitBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/TeamColor"
+        android:text="제출"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toStartOf="@+id/evaluate_CancelBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/evaluateEditText" />
+
+    <Button
+        android:id="@+id/evaluate_CancelBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="#FF0000"
+        android:text="취소"
+        android:textColor="#FFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/evaluateEditText" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
