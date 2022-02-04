@@ -87,7 +87,9 @@
             android:backgroundTint="#F5F5F5"
             android:ems="10"
             android:hint="   내용을 입력하세요"
-            android:inputType="textMultiLine" />
+            android:inputType="text"
+            android:textAlignment="center"
+            android:textSize="18sp" />
 
     </LinearLayout>
 
@@ -116,9 +118,9 @@
 
             <TextView
                 android:id="@+id/textView10"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="삭제"
+                android:text="지우기"
                 android:textAlignment="center"
                 android:textColor="@color/TeamColor"
                 android:textSize="18sp"

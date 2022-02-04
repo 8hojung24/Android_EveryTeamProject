@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.DatePicker
+import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import java.text.SimpleDateFormat
@@ -16,6 +17,8 @@ import java.util.*
 class Schedule_Edit : AppCompatActivity() {
     var dateString = ""
     var timeString = ""
+    lateinit var Title: EditText
+    lateinit var memoBtn: Button
     lateinit var back: Button
     lateinit var ChooseDate: Button
     lateinit var ShowDate: TextView
@@ -27,12 +30,13 @@ class Schedule_Edit : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_schedule__edit)
 
+        Title = findViewById<EditText>(R.id.Title)
+        memoBtn = findViewById<Button>(R.id.memoBtn)
         back = findViewById<Button>(R.id.back)
         ChooseDate = findViewById<Button>(R.id.ChooseDate)
         ShowDate = findViewById<TextView>(R.id.ShowDate)
         closingTime1 = findViewById<TextView>(R.id.closingTime1)
         closingTime2 = findViewById<TextView>(R.id.closingTime2)
-
         // 수정 필요
 //        back.setOnClickListener {
 //            val intent = Intent(this, Fragment_calendar::class.java)
@@ -76,5 +80,12 @@ class Schedule_Edit : AppCompatActivity() {
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY), cal.get(Calendar.MINUTE), false).show()
         }
+
+        memoBtn.setOnClickListener {
+            var intent = Intent(this, Schedule_memo::class.java)
+            startActivity(intent)
+        }
     }
+
+
 }
