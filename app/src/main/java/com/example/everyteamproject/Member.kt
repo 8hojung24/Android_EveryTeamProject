@@ -10,5 +10,6 @@ data class Member(
 class Member: Serializable{
     var name: String ?= null
     var role: String ?= null
-    var time: String ?= null
+    var day: String ?= null
+    var time: String?= null
 }

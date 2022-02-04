@@ -74,7 +74,8 @@ class Holder(val binding: ActivityTodolistBinding) : RecyclerView.ViewHolder(bin
     fun setData(member: Member, position: Int){
         binding.textView.text = member.name
         binding.textView2.text = member.role
-        binding.textView3.text = member.time
+        binding.textView3.text = member.day
+        binding.textView4.text = member.time
         this.mMember = member
         this.mPosition = position
     }

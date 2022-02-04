@@ -73,7 +73,8 @@ class Fragment_mypage : Fragment(), View.OnClickListener{
         item.name = "Team Project $i"
         i++
         item.role = " xxx: 개발 \n xxx: 개발 \n xxx: 개발 \n xxx: 개발"
-        item.time = "2022년 2월 7일"
+        item.day = "2022년 2월 7일"
+        item.time = "7시 30분" + " 까지"
         data?.add(item)
         adapter?.notifyDataSetChanged()
 
