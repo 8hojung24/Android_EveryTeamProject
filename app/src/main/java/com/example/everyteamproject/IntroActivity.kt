@@ -14,7 +14,7 @@ class IntroActivity : AppCompatActivity() {
     }
 
 
-    // 하단 소프트키 없애기 (몰입모드)
+    /*// 하단 소프트키 없애기 (몰입모드)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
@@ -25,7 +25,7 @@ class IntroActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_FULLSCREEN
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
-    }
+    }*/
 
     // 메뉴바 -> 몰입모드 실행 시 필요 X
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

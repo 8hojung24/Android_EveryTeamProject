@@ -1,14 +1,18 @@
 package com.example.everyteamproject
 
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP
-import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.kakao.sdk.user.UserApiClient
+
 
 @Suppress("DEPRECATION")
 class SetActivity : AppCompatActivity() {
@@ -18,7 +22,8 @@ class SetActivity : AppCompatActivity() {
     lateinit var feedback: Button
     lateinit var evaluate: Button
     lateinit var developerIntro: Button
-    lateinit var developerEmail: Button
+    lateinit var developerEmail : Button
+    lateinit var name : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +34,7 @@ class SetActivity : AppCompatActivity() {
         feedback = findViewById(R.id.feedback)
         evaluate = findViewById(R.id.evaluate)
         developerIntro = findViewById(R.id.developerIntro)
-        //developerEmail = findViewById(R.id.developerEmail)
+        developerEmail = findViewById(R.id.developerEmail)
 
         // 뒤로가기 버튼 클릭시 MainActivity 로 이동
         backBtn.setOnClickListener {
@@ -37,9 +42,15 @@ class SetActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        //카카오톡 닉네임으로 설정
+        val nickname = findViewById<TextView>(R.id.name) // 로그인 버튼
+        UserApiClient.instance.me { user, error ->
+            nickname.text = "${user?.kakaoAccount?.profile?.nickname}"
+        }
+
         // 로그아웃 버튼 클릭시 LoginActivity 로 이동
         logout.setOnClickListener {
-            UserApiClient.instance.logout {error ->
+            UserApiClient.instance.logout { error ->
                 if(error!=null){
                     Toast.makeText(this, "로그아웃 실패 $error", Toast.LENGTH_SHORT).show()
                 }else {
@@ -70,15 +81,20 @@ class SetActivity : AppCompatActivity() {
         }
 
 
-        /*
-        // 개발자 이메일 버튼 클릭시 메일 보내기로 이동
+        // 개발자 이메일 보여주기
         developerEmail.setOnClickListener {
-            val intent = Intent(Intent.ACTION_SENDTO)
-            intent.data = Uri.parse("mailto:example@example.com")
-            if(intent.resolveActivity(packageManager) != null) {
-                startActivity(intent)
+            var dlg = AlertDialog.Builder(this)
+            dlg.setTitle("모두의 팀플 E-mail")
+            dlg.setMessage("abc123@naver.com")
+            dlg.setPositiveButton("확인"){ dialog, i: Int ->
+                //확인버튼을 누르면 개발자 이메일주소 클립보드에 복사
+                val clipboard = getSystemService(CLIPBOARD_SERVICE) as ClipboardManager
+                val clip = ClipData.newPlainText("label", "abc123@naver.com")
+                clipboard.setPrimaryClip(clip)
+                Toast.makeText(this@SetActivity, "복사되었습니다.", Toast.LENGTH_SHORT).show()
             }
-        }*/
+            dlg.show()
+        }
     }
 
     // 하단 소프트키 없애기 (몰입모드)
