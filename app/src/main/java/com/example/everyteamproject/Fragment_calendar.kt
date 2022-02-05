@@ -18,11 +18,11 @@ import java.util.*
 
 class Fragment_calendar : Fragment(){
 
-    lateinit var calendarView: CalendarView
+    lateinit var mcalendarView: CalendarView
     lateinit var selectedDate: TextView
     lateinit var save_Btn: Button
-    lateinit var printSchedule: TextView
 
+    var mDate = ""
     var mDBHelper: DBHelper? = null
     private lateinit var rv_todo:RecyclerView
 
@@ -33,7 +33,7 @@ class Fragment_calendar : Fragment(){
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        calendarView = view.findViewById(R.id.calendarView)
+        mcalendarView = view.findViewById(R.id.calendarView)
         selectedDate = view.findViewById(R.id.selectedDate)
         save_Btn = view.findViewById(R.id.save_Btn)
 
@@ -41,8 +41,16 @@ class Fragment_calendar : Fragment(){
         mDBHelper = DBHelper(context)
         mAdapter?.mDBHelper = mDBHelper as DBHelper
 
-        loadRecentDB()
-        init()
+        // 캘린더 구현
+        mcalendarView.setOnDateChangeListener { calendarView, i, i2, i3 ->
+            selectedDate.visibility = View.VISIBLE
+            mDate = "${i}/${i2+1}/${i3}"
+            selectedDate.text = mDate
+            loadRecentDB()
+            init()
+        }
+
+
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -55,50 +63,20 @@ class Fragment_calendar : Fragment(){
         save_Btn.setOnClickListener {
             val intent = Intent(context, Schedule_registration::class.java)
             startActivity(intent)
-
         }
 
         return v
     }
 
-    //수정 필요
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        var date: Date? = null
-        val v = context?.let { CalendarView(it) }
-        v?.setOnDateChangeListener { view, year, month, dayOfMonth ->
-            selectedDate.visibility = View.VISIBLE // 해당 날짜가 뜨는 textView가 Visible
-            save_Btn.visibility = View.VISIBLE // 저장 버튼이 Visible
-            printSchedule.visibility = View.VISIBLE // 저장된 일정 textView가 Invisible
-
-            selectedDate.text = String.format(
-                    "%d / %d / %d",
-                    year,
-                    month + 1,
-                    dayOfMonth
-            )  // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
-            date = Date(year, month, dayOfMonth)
-        }
-//        val myView: View = inflater.inflate(R.layout.fragment_one, container, false)
-//        val mybutton: Button = myView.findViewById(R.id.save_Btn)
-
     }
-
-//            saveDiary(fname) // saveDiary 메소드 호출
-//            var t1 = Toast.makeText(this, fname + "데이터를 저장했습니다.", Toast.LENGTH_SHORT)
-//            t1.show()
-//            str = contextEditText.getText().toString() // str 변수에 edittext내용을 toString 형으로 저장
-//            printSchedule.text = "${str}" // textView에 str 출력
-//            save_Btn.visibility = View.INVISIBLE
-//            cha_Btn.visibility = View.VISIBLE
-//            del_Btn.visibility = View.VISIBLE
-//            contextEditText.visibility = View.INVISIBLE
-//            printSchedule.visibility = View.VISIBLE
 
     private fun loadRecentDB() {
         // 저장되어있던 DB를 가져온다.
-        ScheduleItems = mDBHelper?.getScheduleList()
+        ScheduleItems = mDBHelper?.selectData(mDate)
         if (mAdapter == null) {
             mAdapter = context?.let { CustomAdapter(ScheduleItems, it) }
             rv_todo.setHasFixedSize(true)
@@ -113,7 +91,6 @@ class Fragment_calendar : Fragment(){
         linearLayoutManager.orientation=RecyclerView.VERTICAL
         rv_todo?.adapter = mAdapter
         rv_todo?.layoutManager = linearLayoutManager
-
     }
 
 }

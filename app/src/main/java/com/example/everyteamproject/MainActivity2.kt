@@ -24,10 +24,6 @@ class MainActivity2 : AppCompatActivity() {
                     val intent = Intent(this@MainActivity2, MainActivity::class.java)
                     startActivity(intent)
                 }
-                R.id.action_matching -> {
-                    val matchingFragment = Fragment_matching()
-                    supportFragmentManager.beginTransaction().replace(R.id.main_frame, matchingFragment).commit()
-                }
                 R.id.action_mypage -> {
                     val mypageFragment = Fragment_mypage()
                     supportFragmentManager.beginTransaction().replace(R.id.main_frame, mypageFragment).commit()

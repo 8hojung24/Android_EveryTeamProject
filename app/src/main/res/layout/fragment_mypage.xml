@@ -3,35 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/viewGroup"
     tools:context=".Fragment_mypage">
+
+    <TextView
+        android:id="@+id/tvNotice"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="모두의 팀플"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view_main"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view_main"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view_main"
+        app:layout_constraintTop_toTopOf="@+id/recycler_view_main" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginEnd="32dp"
+        android:background="@drawable/ic_baseline_group_add_24"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view_main"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view_main"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_view_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="70dp"
+        android:layout_height="550dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end|bottom"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="150dp"
-        android:contentDescription="NewProject"
-        android:src="@drawable/ic_baseline_add_24"
-        app:backgroundTint="#D5D5D5"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 
     <FrameLayout
@@ -40,27 +48,21 @@
         android:layout_height="674dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button" />
     </FrameLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavi"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:itemIconTint="@color/black"
         android:background="@color/white"
+        app:itemIconTint="@color/black"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:menu="@menu/main2"
-        tools:layout_editor_absoluteX="0dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/main2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,66 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
     tools:context=".StudyGroup">
 
-    <TextView
-        android:id="@+id/tvId"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_marginTop="20dp" />
+        android:paddingTop="20dp"
+        android:paddingBottom="40dp">
 
-    <TextView
-        android:id="@+id/tvTitle"
+        <Button
+            android:id="@+id/back"
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:background="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="상세 내용"
+            android:textAlignment="center"
+            android:textSize="24sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="10dp">
 
-    <TextView
-        android:id="@+id/tvRole"
+        <TextView
+            android:id="@+id/ProjectName"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:text="주제"
+            android:textColor="@color/TeamColor"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/tvProjectName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFFFFF"
+            android:ems="10"
+            android:hint="주제를 입력해주세요"
+            android:inputType="textShortMessage"
+            android:privateImeOptions="defaultInputmode=Korean"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#8C9191"/>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="30dp"
+        android:paddingTop="10dp">
 
-    <TextView
-        android:id="@+id/tvDeadline"
+        <TextView
+            android:id="@+id/Role"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:text="역할"
+            android:textColor="@color/TeamColor"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvRole"
+            android:layout_width="match_parent"
+            android:layout_height="123dp"
+            android:hint="팀원1 : 역할1\n팀원2 : 역할2\n팀원3 : 역할3\n팀원4 : 역할4"
+            android:textAlignment="center"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#8C9191" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="horizontal"
+        android:paddingBottom="30dp"
+        android:paddingTop="10dp">
 
-    <TextView
-        android:id="@+id/tvClosingTime"
+        <TextView
+            android:id="@+id/Deadline"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:text="마감일"
+            android:textColor="@color/TeamColor"
+            android:textColorHighlight="@color/teal_700"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvDeadline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="마감일입니다."
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <View
+        android:id="@+id/view3"
+        android:layout_width="match_parent"
+        android:layout_height="2px"
+        android:background="#8C9191" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:textColor="@color/black"
-        android:textSize="25sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingBottom="30dp"
+        android:paddingTop="10dp">
 
+        <TextView
+            android:id="@+id/ClosingTime"
+            android:layout_width="125sp"
+            android:layout_height="wrap_content"
+            android:text="마감 시간"
+            android:textColor="@color/TeamColor"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvClosingTime"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="마감시간입니다."
+            android:textAlignment="center"
+            android:textSize="18sp" />
+
+    </LinearLayout>
 </LinearLayout>

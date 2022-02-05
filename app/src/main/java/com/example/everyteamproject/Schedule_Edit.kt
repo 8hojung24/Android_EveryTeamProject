@@ -4,17 +4,21 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import com.example.everyteamproject.com.example.everyteamproject.CustomAdapter
 import com.example.everyteamproject.com.example.everyteamproject.DBHelper
+import com.example.everyteamproject.com.example.everyteamproject.ScheduleItem
 import java.text.SimpleDateFormat
 import java.util.*
 
-class Schedule_Edit : AppCompatActivity() {
+class Schedule_Edit() : AppCompatActivity() {
+    lateinit var mDate: String
     var dateString = ""
     var timeString = ""
     lateinit var Title: EditText
@@ -25,8 +29,12 @@ class Schedule_Edit : AppCompatActivity() {
     lateinit var closingTime1: TextView
     lateinit var closingTime2: TextView
     lateinit var delBtn: Button
+    lateinit var saveBtn: Button
+    lateinit var etPlace: EditText
 
     lateinit var mDBHelper: DBHelper
+    lateinit var ScheduleItems : MutableList<ScheduleItem>
+    private var mAdapter: CustomAdapter?= null
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +49,35 @@ class Schedule_Edit : AppCompatActivity() {
         closingTime1 = findViewById<TextView>(R.id.closingTime1)
         closingTime2 = findViewById<TextView>(R.id.closingTime2)
         delBtn = findViewById<Button>(R.id.delBtn)
+        memoBtn = findViewById<Button>(R.id.memoBtn)
+        saveBtn = findViewById<Button>(R.id.saveBtn)
+        etPlace = findViewById(R.id.etPlace)
 
+        ScheduleItems = mutableListOf<ScheduleItem>()
         mDBHelper = DBHelper(this)
 
-        // 수정 필요
-//        back.setOnClickListener {
-//            val intent = Intent(this, Fragment_calendar::class.java)
-//            startActivity(intent)
-//        }
+        // 수정 이전 데이터 불러오기
+        var getTitle = (intent.getStringExtra("title"))
+        mDate = (intent.getStringExtra("date").toString())
+        var getStart = (intent.getStringExtra("startTime"))
+        var getEnd = (intent.getStringExtra("endTime"))
+        var getPlace = (intent.getStringExtra("place"))
+
+        Title.setText(getTitle)
+        ShowDate.setText(mDate)
+        closingTime1.setText(getStart)
+        closingTime2.setText(getEnd)
+        etPlace.setText(getPlace)
+
+        // 마우스 커서를 글자 뒤로 보내기
+        Title.setSelection(Title.text.length)
+        etPlace.setSelection(etPlace.text.length)
+
+        // 뒤로가기 버튼
+        back.setOnClickListener {
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
 
         ChooseDate.setOnClickListener {
             val cal = Calendar.getInstance()
@@ -59,9 +88,10 @@ class Schedule_Edit : AppCompatActivity() {
                 val Simpledateformat = SimpleDateFormat("EEEE", Locale.getDefault())
                 val DayName: String = Simpledateformat.format(Date)
                 dateString = "${month+1}.${dayOfMonth}($DayName)"
-                ShowDate.text = dateString
+                ShowDate.text = dateString // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
+                mDate = "${year}/${month+1}/${dayOfMonth}"
             }
-            val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
+            val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
 
 //           최소 날짜를 현재 시각 이후로
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
@@ -94,7 +124,25 @@ class Schedule_Edit : AppCompatActivity() {
         }
 
         delBtn.setOnClickListener {
-//            mDBHelper.Delete()
+            var num = (intent.getStringExtra("id"))?.toInt()
+            mDBHelper.Delete(num)
+            mAdapter?.notifyDataSetChanged()
+            Toast.makeText(applicationContext, "일정이 제거 되었습니다", Toast.LENGTH_SHORT).show()
+
+            var intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+        }
+
+        saveBtn.setOnClickListener {
+            var num = (intent.getStringExtra("id"))?.toInt()
+            mDBHelper.Update(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), etPlace.text.toString(), num)
+            mAdapter?.notifyDataSetChanged()
+            Toast.makeText(applicationContext, "일정이 수정 되었습니다", Toast.LENGTH_SHORT).show()
+
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+
         }
     }
+
 }

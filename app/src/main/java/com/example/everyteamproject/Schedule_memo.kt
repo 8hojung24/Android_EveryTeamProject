@@ -39,7 +39,7 @@ class Schedule_memo : AppCompatActivity() {
 
         saveBtn.setOnClickListener {
             saveData(Title.text.toString(), Memo.text.toString())
-            var intent = Intent(this, Schedule_Edit::class.java)
+            var intent = Intent(this, MainActivity2::class.java)
             intent.putExtra("title", Title.text.toString())
             intent.putExtra("memo", Memo.text.toString())
             Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show() // 토스트 메세지

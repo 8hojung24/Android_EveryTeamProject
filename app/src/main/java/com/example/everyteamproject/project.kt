@@ -4,5 +4,5 @@ package com.example.everyteamproject.com.example.everyteamproject
 // 마감일과 마감시간 data type 수정
 
 class project (var ProjectName:String="", var Role:String="", var DeadLine:String="", var ClosingTime:String=""){
-    var id:Int = 0
+    var id:Int? = 0
 }
