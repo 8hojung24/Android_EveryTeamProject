@@ -8,6 +8,7 @@ data class Member(
     )*/
 
 class Member: Serializable{
+    var id: Int ?= 0
     var name: String ?= null
     var role: String ?= null
     var day: String ?= null

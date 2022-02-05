@@ -18,9 +18,9 @@ import kotlinx.android.synthetic.main.activity_registration.*
 import com.example.everyteamproject.com.example.everyteamproject.DataBaseHandler
 import com.example.everyteamproject.com.example.everyteamproject.project
 import com.example.everyteamproject.databinding.FragmentMypageBinding
+import com.kakao.sdk.user.model.User
 import java.text.SimpleDateFormat
 import java.util.*
-
 
 class Registration : AppCompatActivity() {
     var dateString = ""
@@ -64,7 +64,7 @@ class Registration : AppCompatActivity() {
                 Deadline.text = dateString
             }
             val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),
-                    cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
+                cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
 
 //           최소 날짜를 현재 시각 이후로
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
@@ -78,7 +78,7 @@ class Registration : AppCompatActivity() {
                 ClosingTime.text = timeString
             }
             TimePickerDialog(this, timeSetListener, cal.get(Calendar.HOUR_OF_DAY),
-                    cal.get(Calendar.MINUTE), false).show()
+                cal.get(Calendar.MINUTE), false).show()
         }
 
         //RoleDialog
@@ -95,22 +95,34 @@ class Registration : AppCompatActivity() {
         //DB
         EditBtn.setOnClickListener {
             //Insert Database
+
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
+
             mDataBaseHandler.Insert(ProjectName.text.toString(), Role.text.toString(), Deadline.text.toString(), ClosingTime.text.toString())
             Toast.makeText(applicationContext, "추가되었습니다.", Toast.LENGTH_SHORT).show()
 
             lateinit var binding : FragmentMypageBinding
+            binding = FragmentMypageBinding.inflate(layoutInflater)
             var adapter: AdapterRecycler?=null
             var data:MutableList<Member>?=mutableListOf()
 
             val item = Member()
+            val mdata : MutableList<project> = mDataBaseHandler.readData()
 
             // 108~111 이 부분에서 db에 저장된 데이터가 업데이트 되어야 할 것 같습니다!
-            item.name = ProjectName.text.toString()
-            item.role = Role.text.toString()
-            item.day = Deadline.text.toString()
-            item.time = ClosingTime.text.toString()
 
-            data?.add(item)
+            if(mdata.isNotEmpty()){
+                for(i in 0 until mdata.size) {
+                    item.id = mdata[i].id
+                    item.name = mdata[i].ProjectName
+                    item.role = mdata[i].Role
+                    item.day = mdata[i].DeadLine
+                    item.time = mdata[i].ClosingTime
+                    data?.add(item)
+                }
+            }
+
             adapter?.notifyDataSetChanged()
 
             adapter = AdapterRecycler(Fragment_mypage())
@@ -120,14 +132,12 @@ class Registration : AppCompatActivity() {
             binding?.recyclerViewMain?.layoutManager = linearLayoutManager
             binding?.recyclerViewMain?.adapter = adapter
 
-            val intent = Intent(this, MainActivity2::class.java)
-            startActivity(intent)
-
         }
-
         back.setOnClickListener {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
         }
     }
+
+
 }

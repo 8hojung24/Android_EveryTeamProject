@@ -63,4 +63,6 @@ class DBHelper(var context: Context?) : SQLiteOpenHelper(context, "mySQL",null,1
         sqlDB = this.writableDatabase
         sqlDB.execSQL("DELETE FROM ScheduleDB WHERE id = '"+ _id + "'")
     }
+
+
 }

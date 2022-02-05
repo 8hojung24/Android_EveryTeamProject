@@ -29,7 +29,7 @@ class Edit : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_registration)
+        setContentView(R.layout.activity_edit)
 
         ProjectName = findViewById(R.id.ProjectName)
         DeadlineBtn = findViewById(R.id.DeadlineBtn)

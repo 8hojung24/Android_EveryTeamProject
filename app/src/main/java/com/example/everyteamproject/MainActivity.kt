@@ -15,7 +15,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.kakao.sdk.common.util.Utility
 import com.kakao.sdk.user.UserApiClient
 
-
 /* <solid android:color="#6D9773" /> // 배경색 */
 
 @Suppress("DEPRECATION")
@@ -56,7 +55,6 @@ class MainActivity : AppCompatActivity() {
         // 카카오 로그인 hash 키
         val keyHash = Utility.getKeyHash(this)
         Log.d("Hash", keyHash)
-
 
         // 프로필 사진 설정
         profileImg.setOnClickListener {
@@ -123,7 +121,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-
     // 메뉴바 -> 몰입모드 실행 시 필요 X
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
@@ -139,7 +136,6 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         }
-
         return super.onOptionsItemSelected(item)
     }
 }
