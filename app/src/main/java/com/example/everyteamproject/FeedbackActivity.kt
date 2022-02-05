@@ -98,9 +98,9 @@ class FeedbackActivity : AppCompatActivity() {
             send_intent.putExtra(Intent.EXTRA_TEXT, feedbackEditText.text.toString())
 
             //이미지가 있다면
-            if (selectedImageUri != null) {
+            /*if (selectedImageUri != null) {
                 send_intent.putExtra(Intent.EXTRA_STREAM, selectedImageUri.toString())
-            }
+            }*/
 
             if (send_intent.resolveActivity(packageManager) != null) {
                 startActivity(send_intent)
@@ -137,27 +137,9 @@ class FeedbackActivity : AppCompatActivity() {
         }
     }
 
-    /*// 하단 소프트키 없애기 (몰입모드)
-    override fun onWindowFocusChanged(hasFocus: Boolean) {
-        super.onWindowFocusChanged(hasFocus)
-        if (hasFocus) {
-            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
-                    or View.SYSTEM_UI_FLAG_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
-        }
-    }*/
-
     // 메뉴바 -> 몰입모드 실행 시 필요 X
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return true
     }
-
 }
-
-
-
-
