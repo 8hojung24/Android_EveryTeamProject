@@ -18,6 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Schedule_Edit() : AppCompatActivity() {
+    var mDate = ""
     var dateString = ""
     var timeString = ""
     lateinit var Title: EditText
@@ -68,7 +69,8 @@ class Schedule_Edit() : AppCompatActivity() {
                 val Simpledateformat = SimpleDateFormat("EEEE", Locale.getDefault())
                 val DayName: String = Simpledateformat.format(Date)
                 dateString = "${month+1}.${dayOfMonth}($DayName)"
-                ShowDate.text = dateString
+                ShowDate.text = dateString // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
+                mDate = "${year}/${month+1}/${dayOfMonth}"
             }
             val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH))
 
@@ -114,7 +116,7 @@ class Schedule_Edit() : AppCompatActivity() {
 
         saveBtn.setOnClickListener {
             var num = (intent.getStringExtra("id"))?.toInt()
-            mDBHelper.Update(Title.text.toString(), ShowDate.text.toString(), closingTime1.text.toString(), closingTime2.text.toString(), "장소", num)
+            mDBHelper.Update(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), "장소", num)
             mAdapter?.notifyDataSetChanged()
             Toast.makeText(applicationContext, "일정이 수정 되었습니다", Toast.LENGTH_SHORT).show()
 

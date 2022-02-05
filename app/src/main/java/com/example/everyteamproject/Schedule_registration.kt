@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Schedule_registration : AppCompatActivity() {
-    var fname: String = ""
+    var mDate = ""
     var dateString = ""
     var timeString = ""
 
@@ -66,7 +66,7 @@ class Schedule_registration : AppCompatActivity() {
                 val DayName: String = Simpledateformat.format(Date)
                 dateString = "${month+1}.${dayOfMonth}($DayName)"
                 ShowDate.text = dateString // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
-
+                mDate = "${year}/${month+1}/${dayOfMonth}"
             }
             val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
 
@@ -96,7 +96,7 @@ class Schedule_registration : AppCompatActivity() {
         // 저장 Button이 클릭되면
         addShedule.setOnClickListener {
             //Insert Database
-            mDBHelper.Insert(Title.text.toString(), ShowDate.text.toString(), closingTime1.text.toString(), closingTime2.text.toString(), "장소")
+            mDBHelper.Insert(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), "장소")
             Toast.makeText(applicationContext, "입력됨", Toast.LENGTH_SHORT).show()
 
             // Insert UI
