@@ -5,6 +5,7 @@ import android.content.pm.PackageManager
 import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
@@ -51,7 +52,7 @@ class FeedbackActivity : AppCompatActivity() {
                             this,
                             android.Manifest.permission.READ_EXTERNAL_STORAGE
                     )
-                != PackageManager.PERMISSION_GRANTED
+                    != PackageManager.PERMISSION_GRANTED
             ) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(
                                 this,
@@ -97,8 +98,8 @@ class FeedbackActivity : AppCompatActivity() {
             send_intent.putExtra(Intent.EXTRA_TEXT, feedbackEditText.text.toString())
 
             //이미지가 있다면
-            if(selectedImageUri != null ){
-                send_intent.putExtra(Intent.EXTRA_STREAM, selectedImageUri)
+            if (selectedImageUri != null) {
+                send_intent.putExtra(Intent.EXTRA_STREAM, selectedImageUri.toString())
             }
 
             if (send_intent.resolveActivity(packageManager) != null) {
@@ -135,7 +136,8 @@ class FeedbackActivity : AppCompatActivity() {
             attachImg1.setImageURI(selectedImageUri);
         }
     }
-    // 하단 소프트키 없애기 (몰입모드)
+
+    /*// 하단 소프트키 없애기 (몰입모드)
     override fun onWindowFocusChanged(hasFocus: Boolean) {
         super.onWindowFocusChanged(hasFocus)
         if (hasFocus) {
@@ -146,13 +148,16 @@ class FeedbackActivity : AppCompatActivity() {
                     or View.SYSTEM_UI_FLAG_FULLSCREEN
                     or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
         }
+    }*/
+
+    // 메뉴바 -> 몰입모드 실행 시 필요 X
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        return true
     }
+
 }
 
-// 메뉴바 -> 몰입모드 실행 시 필요 X
-/*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-    menuInflater.inflate(R.menu.main, menu)
-    return true
-}*/
+
 
 
