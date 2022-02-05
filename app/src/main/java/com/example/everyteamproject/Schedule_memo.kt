@@ -71,7 +71,5 @@ class Schedule_memo : AppCompatActivity() {
             Title.setText(title.toString())
             Memo.setText(memo.toString())
         }
-
     }
-
 }

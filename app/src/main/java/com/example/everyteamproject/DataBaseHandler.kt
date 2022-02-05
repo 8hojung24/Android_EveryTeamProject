@@ -5,7 +5,9 @@ import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.widget.Toast
 import com.example.everyteamproject.com.example.everyteamproject.project
+import com.kakao.sdk.user.model.User
 
 class DataBaseHandler(var context: Context?) : SQLiteOpenHelper(context, "MyDB2",null,1){
     lateinit var sqliteDB: SQLiteDatabase
@@ -56,12 +58,39 @@ class DataBaseHandler(var context: Context?) : SQLiteOpenHelper(context, "MyDB2"
     fun Update(_ProjectName : String, _Role : String, _DeadLine : String, _ClosingTime : String, _id: Int){
         sqliteDB = this.writableDatabase
 
-        sqliteDB.execSQL("UPDATE ProjectDB SET ProjectName = '"+ _ProjectName +"', Role = '"+ _Role +"', DeadLine = '"+ _DeadLine +"', endTime = '"+ _ClosingTime  +"', WHERE id ='" + _id +"'")
+        sqliteDB.execSQL("UPDATE ProjectDB SET ProjectName = '"+
+                _ProjectName +"', Role = '"+ _Role +"', DeadLine = '"+
+                _DeadLine +"', endTime = '"+ _ClosingTime  +"', WHERE id ='" + _id +"'")
     }
 
     // DELETE 문 (프로젝트 목록을 제거 한다.)
     fun Delete(_id : Int){
         sqliteDB = this.writableDatabase
         sqliteDB.execSQL("DELETE FROM ProjectDB WHERE id = '"+ _id + "'")
+    }
+
+
+    //READ
+    fun readData():MutableList<project>{
+        val list :MutableList<project> = ArrayList()
+        val db = this.readableDatabase
+        val query = "Select * from projectDB"
+        val result:Cursor = db.rawQuery(query,null)
+
+        if(result.moveToFirst()){
+            do {
+                val project = project()
+                project.id= result.getColumnIndex("id")
+                project.ProjectName = result.getColumnIndex("ProjectName").toString()
+                project.Role = result.getColumnIndex("Role").toString()
+                project.DeadLine = result.getColumnIndex("DeadLine").toString()
+                project.ClosingTime = result.getColumnIndex("ClosingTime").toString()
+                list.add(project)
+            }while (result.moveToNext())
+        }else
+            Toast.makeText(context,"저장된 프로젝트가 없습니다",Toast.LENGTH_SHORT).show()
+
+        result.close()
+        return list
     }
 }
