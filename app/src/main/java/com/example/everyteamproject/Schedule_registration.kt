@@ -30,7 +30,8 @@ class Schedule_registration : AppCompatActivity() {
 
     lateinit var mDBHelper: DBHelper
     lateinit var ScheduleItems : MutableList<ScheduleItem>
-    lateinit var mAdapter: CustomAdapter
+    private var mAdapter: CustomAdapter?= null
+
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -48,11 +49,10 @@ class Schedule_registration : AppCompatActivity() {
         mDBHelper = DBHelper(this)
         ScheduleItems = mutableListOf<ScheduleItem>()
 
-        // loadRecentDB()
 
-        // 뒤로가기 버튼 수정 필요
+        // 뒤로가기 버튼
         back.setOnClickListener {
-            val intent = Intent(this, Fragment_calendar::class.java)
+            val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
         }
 
@@ -100,14 +100,28 @@ class Schedule_registration : AppCompatActivity() {
             Toast.makeText(applicationContext, "입력됨", Toast.LENGTH_SHORT).show()
 
             // Insert UI
+            init()
+            val intent = Intent(this, MainActivity2::class.java)
+            startActivity(intent)
         }
-
     }
 
-//    private fun loadRecentDB() {
-//        // 저장되어있던 DB를 가져온다.
-//        ScheduleItems = mDBHelper.getScheduleList()
-//        if (mAdapter == null)
-//            mAdapter = CustomAdapter(ScheduleItems, this)
-//    }
+    fun init() {
+
+        val item = ScheduleItem()
+        item.title = Title.text.toString()
+        item.startTime = closingTime1.text.toString()
+        item.endTime = closingTime2.text.toString()
+        ScheduleItems?.add(item)
+        mAdapter?.addItem(item)
+        mAdapter?.notifyDataSetChanged()
+
+
+//        mAdapter = CustomAdapter(, it)
+//        mAdapter!!.scheduleItems = ScheduleItems as MutableList<ScheduleItem>
+//        var linearLayoutManager = LinearLayoutManager(activity)
+//        linearLayoutManager.orientation= RecyclerView.VERTICAL
+//        rv_todo?.layoutManager = linearLayoutManager
+//        rv_todo?.adapter = mAdapter
+    }
 }

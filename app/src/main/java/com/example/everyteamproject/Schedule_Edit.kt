@@ -7,10 +7,10 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.DatePicker
 import android.widget.EditText
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import com.example.everyteamproject.com.example.everyteamproject.DBHelper
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -24,6 +24,9 @@ class Schedule_Edit : AppCompatActivity() {
     lateinit var ShowDate: TextView
     lateinit var closingTime1: TextView
     lateinit var closingTime2: TextView
+    lateinit var delBtn: Button
+
+    lateinit var mDBHelper: DBHelper
 
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,6 +40,10 @@ class Schedule_Edit : AppCompatActivity() {
         ShowDate = findViewById<TextView>(R.id.ShowDate)
         closingTime1 = findViewById<TextView>(R.id.closingTime1)
         closingTime2 = findViewById<TextView>(R.id.closingTime2)
+        delBtn = findViewById<Button>(R.id.delBtn)
+
+        mDBHelper = DBHelper(this)
+
         // 수정 필요
 //        back.setOnClickListener {
 //            val intent = Intent(this, Fragment_calendar::class.java)
@@ -85,7 +92,9 @@ class Schedule_Edit : AppCompatActivity() {
             var intent = Intent(this, Schedule_memo::class.java)
             startActivity(intent)
         }
+
+        delBtn.setOnClickListener {
+//            mDBHelper.Delete()
+        }
     }
-
-
 }

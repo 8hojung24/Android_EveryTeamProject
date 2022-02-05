@@ -6,14 +6,43 @@
     android:layout_height="match_parent"
     tools:context=".Fragment_calendar">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_todo"
+        android:layout_width="377dp"
+        android:layout_height="142dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="388dp"
+        android:layout_marginEnd="8dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.555"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/schedule_list" />
+
     <CalendarView
         android:id="@+id/calendarView"
         android:layout_width="406dp"
         android:layout_height="338dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.454"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/selectedDate"
+        android:layout_width="208dp"
+        android:layout_height="22dp"
+        android:layout_marginStart="92dp"
+        android:layout_marginTop="356dp"
+        android:text="2022/02/01"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -23,7 +52,7 @@
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="140dp"
         android:background="@color/ButtonColor"
         android:text="+  일정 추가"
         android:textColor="#FFFFFF"
@@ -32,34 +61,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <!--    저장된 일정 출력 -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_todo"
-        android:layout_width="377dp"
-        android:layout_height="142dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="460dp"
-        android:layout_marginEnd="8dp"
-        tools:listitem="@layout/schedule_list"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.555"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <!--    선택된 날짜가 뜨는 textView -->
-    <TextView
-        android:id="@+id/selectedDate"
-        android:layout_width="208dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="428dp"
-        android:text="2022/02/01"
-        android:textAlignment="center"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:visibility="invisible"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
