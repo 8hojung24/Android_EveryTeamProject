@@ -3,22 +3,12 @@ package com.example.everyteamproject
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
-import android.database.sqlite.SQLiteDatabase
-import android.os.Build
 import android.os.Bundle
 import android.widget.Button
 import android.widget.TextView
-import androidx.annotation.RequiresApi
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.everyteamproject.com.example.everyteamproject.AdapterRecycler
-import kotlinx.android.synthetic.main.activity_registration.*
-import com.example.everyteamproject.com.example.everyteamproject.DataBaseHandler
-import com.example.everyteamproject.com.example.everyteamproject.project
-import com.example.everyteamproject.databinding.FragmentMypageBinding
-import com.kakao.sdk.user.model.User
+import com.example.everyteamproject.com.example.everyteamproject.*
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -101,36 +91,6 @@ class Registration : AppCompatActivity() {
 
             mDataBaseHandler.Insert(ProjectName.text.toString(), Role.text.toString(), Deadline.text.toString(), ClosingTime.text.toString())
             Toast.makeText(applicationContext, "추가되었습니다.", Toast.LENGTH_SHORT).show()
-
-            lateinit var binding : FragmentMypageBinding
-            binding = FragmentMypageBinding.inflate(layoutInflater)
-            var adapter: AdapterRecycler?=null
-            var data:MutableList<Member>?=mutableListOf()
-
-            val item = Member()
-            val mdata : MutableList<project> = mDataBaseHandler.readData()
-
-            // 108~111 이 부분에서 db에 저장된 데이터가 업데이트 되어야 할 것 같습니다!
-
-            if(mdata.isNotEmpty()){
-                for(i in 0 until mdata.size) {
-                    item.id = mdata[i].id
-                    item.name = mdata[i].ProjectName
-                    item.role = mdata[i].Role
-                    item.day = mdata[i].DeadLine
-                    item.time = mdata[i].ClosingTime
-                    data?.add(item)
-                }
-            }
-
-            adapter?.notifyDataSetChanged()
-
-            adapter = AdapterRecycler(Fragment_mypage())
-            adapter!!.listData = data as ArrayList<Member>
-            var linearLayoutManager = LinearLayoutManager(this)
-            linearLayoutManager.orientation= RecyclerView.VERTICAL
-            binding?.recyclerViewMain?.layoutManager = linearLayoutManager
-            binding?.recyclerViewMain?.adapter = adapter
 
         }
         back.setOnClickListener {

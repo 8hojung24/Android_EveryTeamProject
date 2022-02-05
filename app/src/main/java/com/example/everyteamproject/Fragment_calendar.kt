@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.everyteamproject.com.example.everyteamproject.*
+import kotlinx.android.synthetic.main.fragment_calendar.*
 import java.util.*
 
 
@@ -80,8 +81,6 @@ class Fragment_calendar : Fragment(){
             )  // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
             date = Date(year, month, dayOfMonth)
         }
-//        val myView: View = inflater.inflate(R.layout.fragment_one, container, false)
-//        val mybutton: Button = myView.findViewById(R.id.save_Btn)
 
     }
 

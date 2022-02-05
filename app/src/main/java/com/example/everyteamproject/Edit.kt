@@ -33,7 +33,7 @@ class Edit : AppCompatActivity() {
 
         ProjectName = findViewById(R.id.ProjectName)
         DeadlineBtn = findViewById(R.id.DeadlineBtn)
-        Deadline = findViewById(R.id.Deadline)
+        Deadline = findViewById(R.id.tvDeadline)
         ClosingTime = findViewById(R.id.ClosingTime)
         RoleBtn = findViewById(R.id.RoleBtn)
         Role = findViewById(R.id.Role)
