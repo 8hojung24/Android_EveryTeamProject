@@ -24,7 +24,7 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="프로젝트 내용"
+            android:text="프로젝트 수정"
             android:textAlignment="center"
             android:textSize="24sp"
             android:textStyle="bold" />

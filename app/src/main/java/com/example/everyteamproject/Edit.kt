@@ -3,6 +3,8 @@ package com.example.everyteamproject
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
+import android.database.Cursor
+import android.database.sqlite.SQLiteDatabase
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -26,6 +28,8 @@ class Edit : AppCompatActivity() {
     lateinit var RoleBtn:Button
     lateinit var Role:TextView
     lateinit var back: Button
+    lateinit var sqliteDB: SQLiteDatabase
+    var i : Int? = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,7 +37,7 @@ class Edit : AppCompatActivity() {
 
         ProjectName = findViewById(R.id.ProjectName)
         DeadlineBtn = findViewById(R.id.DeadlineBtn)
-        Deadline = findViewById(R.id.tvDeadline)
+        Deadline = findViewById(R.id.Deadline)
         ClosingTime = findViewById(R.id.ClosingTime)
         RoleBtn = findViewById(R.id.RoleBtn)
         Role = findViewById(R.id.Role)
@@ -41,7 +45,20 @@ class Edit : AppCompatActivity() {
         back = findViewById(R.id.back)
 
         mDataBaseHandler = DataBaseHandler(this)
-        projects = mutableListOf<project>()
+
+        if(intent.hasExtra("id")) {
+            sqliteDB = mDataBaseHandler.readableDatabase
+            var cursor: Cursor
+            i = intent.getStringExtra("id")!!.toInt()
+            cursor = sqliteDB.rawQuery("Select * from ProjectDB WHERE id ='"+i+"'", null)
+
+            while(cursor.moveToNext()){
+                ProjectName?.text = cursor.getString(1)
+                Role?.text = cursor.getString(2)
+                Deadline?.text = cursor.getString(3)
+                ClosingTime?.text = cursor.getString(4)
+            }
+        }
 
         DeadlineBtn.setOnClickListener {
             val cal = Calendar.getInstance()
@@ -86,7 +103,7 @@ class Edit : AppCompatActivity() {
         //DB
         EditBtn.setOnClickListener {
             //Update Database
-            //mDataBaseHandler.Update(ProjectName.text.toString(), Role.text.toString(), Deadline.text.toString(), ClosingTime.text.toString())
+            mDataBaseHandler.Update(ProjectName.text.toString(), Role.text.toString(), Deadline.text.toString(), ClosingTime.text.toString(), i)
             Toast.makeText(applicationContext, "수정되었습니다.", Toast.LENGTH_SHORT).show()
 
             val intent = Intent(this, MainActivity2::class.java)

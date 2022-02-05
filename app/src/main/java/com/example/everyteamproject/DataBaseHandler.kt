@@ -53,12 +53,12 @@ class DataBaseHandler(var context: Context?) : SQLiteOpenHelper(context, "MyDB2"
     }
 
     // UPDATE 문 (프로젝트 목록을 수정 한다.)
-    fun Update(_ProjectName : String, _Role : String, _DeadLine : String, _ClosingTime : String, _id: Int){
+    fun Update(_ProjectName : String, _Role : String, _DeadLine : String, _ClosingTime : String, _id: Int?){
         sqliteDB = this.writableDatabase
 
         sqliteDB.execSQL("UPDATE ProjectDB SET ProjectName = '"+
                 _ProjectName +"', Role = '"+ _Role +"', DeadLine = '"+
-                _DeadLine +"', endTime = '"+ _ClosingTime  +"', WHERE id ='" + _id +"'")
+                _DeadLine +"', ClosingTime = '"+ _ClosingTime  +"' WHERE id ='" + _id +"'")
     }
 
     // DELETE 문 (프로젝트 목록을 제거 한다.)

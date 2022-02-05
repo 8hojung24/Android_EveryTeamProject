@@ -50,7 +50,7 @@ class AdapterRecycler(var project: MutableList<project>?, val mContext: Context)
         }
         holder.itemView.btnEdit.setOnClickListener {
             val intent = Intent(holder.itemView?.context, Edit::class.java)
-            intent.putExtra("id", project?.get(position)?.id)
+            intent.putExtra("id", (project?.get(position)?.id).toString())
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
         holder.itemView.btnDelete.setOnClickListener {
