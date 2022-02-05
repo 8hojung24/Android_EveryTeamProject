@@ -53,16 +53,16 @@ class DBHelper(var context: Context?) : SQLiteOpenHelper(context, "mySQL",null,1
     }
 
     // UPDATE 문 (할일 목록을 수정 한다.)
-    fun Update(_title : String, _date : String, _startTime : String, _endTime : String, _place : String, _id : Int){
+    fun Update(_title : String, _date : String, _startTime : String, _endTime : String, _place : String, _id : Int?){
         sqlDB = this.writableDatabase
 
-        sqlDB.execSQL("UPDATE ScheduleDB SET title = '"+ _title +"', date = '"+ _date +"', startTime = '"+ _startTime +"', endTime = '"+ _endTime +"', place = '"+ _place +"', WHERE id ='" + _id +"'")
+        sqlDB.execSQL("UPDATE ScheduleDB SET title = '"+ _title +"', date = '"+ _date +"', startTime = '"+ _startTime +"', endTime = '"+ _endTime +"', place = '"+ _place +"' WHERE id = " + _id +";")
     }
 
     // DELETE 문 (할일 목록을 제거 한다.)
-    fun Delete(_id : Int){
+    fun Delete(_id : Int?){
         sqlDB = this.writableDatabase
-        sqlDB.execSQL("DELETE FROM ScheduleDB WHERE id = '"+ _id + "'")
+        sqlDB.execSQL("DELETE FROM ScheduleDB WHERE id = '"+ _id + "';")
     }
 
 

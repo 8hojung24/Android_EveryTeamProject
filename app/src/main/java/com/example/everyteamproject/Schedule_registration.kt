@@ -107,7 +107,6 @@ class Schedule_registration : AppCompatActivity() {
     }
 
     fun init() {
-
         val item = ScheduleItem()
         item.title = Title.text.toString()
         item.startTime = closingTime1.text.toString()
@@ -115,13 +114,5 @@ class Schedule_registration : AppCompatActivity() {
         ScheduleItems?.add(item)
         mAdapter?.addItem(item)
         mAdapter?.notifyDataSetChanged()
-
-
-//        mAdapter = CustomAdapter(, it)
-//        mAdapter!!.scheduleItems = ScheduleItems as MutableList<ScheduleItem>
-//        var linearLayoutManager = LinearLayoutManager(activity)
-//        linearLayoutManager.orientation= RecyclerView.VERTICAL
-//        rv_todo?.layoutManager = linearLayoutManager
-//        rv_todo?.adapter = mAdapter
     }
 }
