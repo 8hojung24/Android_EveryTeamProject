@@ -12,6 +12,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
+        android:textColor="@color/TeamColor"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -56,7 +57,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="8dp"
         android:background="@drawable/ic_baseline_delete_24"
-        android:backgroundTint="#A3A3A3"
+        android:backgroundTint="@color/ButtonColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -68,7 +69,7 @@
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
         android:background="@drawable/ic_baseline_edit_24"
-        android:backgroundTint="#A3A3A3"
+        android:backgroundTint="@color/ButtonColor"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

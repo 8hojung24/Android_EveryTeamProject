@@ -7,13 +7,24 @@
     android:id="@+id/viewGroup"
     tools:context=".Fragment_mypage">
 
-    <Button
-        android:id="@+id/button"
+    <TextView
+        android:id="@+id/tvNotice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:text="모두의 팀플"
+        android:textSize="18dp"
+        app:layout_constraintBottom_toBottomOf="@+id/recycler_view_main"
+        app:layout_constraintEnd_toEndOf="@+id/recycler_view_main"
+        app:layout_constraintStart_toStartOf="@+id/recycler_view_main"
+        app:layout_constraintTop_toTopOf="@+id/recycler_view_main" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="54dp"
+        android:layout_height="54dp"
         android:layout_marginTop="450dp"
         android:layout_marginEnd="32dp"
-        android:text="Button"
+        android:background="@drawable/ic_baseline_group_add_24"
         app:layout_constraintBottom_toBottomOf="@+id/recycler_view_main"
         app:layout_constraintEnd_toEndOf="@+id/recycler_view_main"
         app:layout_constraintTop_toTopOf="parent" />
@@ -37,9 +48,10 @@
         android:layout_height="674dp"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavi"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
 
     </FrameLayout>
 

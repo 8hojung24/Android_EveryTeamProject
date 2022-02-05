@@ -6,6 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.EditText
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,7 +15,7 @@ import com.example.everyteamproject.com.example.everyteamproject.*
 
 class Fragment_mypage : Fragment() {
 
-
+    private lateinit var tvNotice: TextView
     private lateinit var button: Button
     private lateinit var recycler_view_main: RecyclerView
     var mDataBaseHandler: DataBaseHandler? = null
@@ -25,7 +27,7 @@ class Fragment_mypage : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
+        tvNotice = view.findViewById(R.id.tvNotice)
         button = view.findViewById(R.id.button)
         recycler_view_main = view.findViewById(R.id.recycler_view_main)
         mDataBaseHandler = DataBaseHandler(context)
@@ -33,6 +35,8 @@ class Fragment_mypage : Fragment() {
 
         loadRecentDB()
         init()
+
+
     }
 
     override fun onCreateView(
