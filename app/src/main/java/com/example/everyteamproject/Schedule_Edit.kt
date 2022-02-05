@@ -18,7 +18,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Schedule_Edit() : AppCompatActivity() {
-    var mDate = ""
+    lateinit var mDate: String
     var dateString = ""
     var timeString = ""
     lateinit var Title: EditText
@@ -58,13 +58,13 @@ class Schedule_Edit() : AppCompatActivity() {
 
         // 수정 이전 데이터 불러오기
         var getTitle = (intent.getStringExtra("title"))
-        var getDate = (intent.getStringExtra("date"))
+        mDate = (intent.getStringExtra("date").toString())
         var getStart = (intent.getStringExtra("startTime"))
         var getEnd = (intent.getStringExtra("endTime"))
         var getPlace = (intent.getStringExtra("place"))
 
         Title.setText(getTitle)
-        ShowDate.setText(getDate)
+        ShowDate.setText(mDate)
         closingTime1.setText(getStart)
         closingTime2.setText(getEnd)
         etPlace.setText(getPlace)
