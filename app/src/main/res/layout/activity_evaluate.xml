@@ -10,10 +10,10 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:layout_marginStart="39dp"
-        android:layout_marginTop="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="100dp"
         android:background="#FFFFFF"
         android:backgroundTint="#00FFFFFF"
@@ -21,22 +21,20 @@
         app:layout_constraintBottom_toTopOf="@+id/evaluateEditText"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.235"
         app:tint="#6D9773" />
 
     <Button
         android:id="@+id/evaluateTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="78dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="179dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="30dp"
         android:background="#00ff0000"
         android:text="앱 평점주기 / 리뷰"
-        android:textSize="18sp"
+        android:textSize="20dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.421"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <RatingBar
@@ -44,7 +42,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:numStars="5"
         android:progressTint="#FFEB3B"
         android:rating="5"
@@ -57,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="15dp"
         android:layout_marginEnd="30dp"
         android:ems="10"
         android:gravity="top"

@@ -10,28 +10,26 @@
         android:id="@+id/imageView"
         android:layout_width="35dp"
         android:layout_height="35dp"
-        android:layout_marginStart="5dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:layout_marginEnd="10dp"
         android:background="#FFFFFF"
         android:backgroundTint="#00FFFFFF"
         android:src="@drawable/ic_baseline_thumb_up_alt_24"
-        app:layout_constraintEnd_toStartOf="@+id/editTextTextPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:tint="#6D9773" />
 
     <TextView
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/EvaluateTitle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginStart="75dp"
+        android:layout_marginTop="35dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:text="평점 및 리뷰"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="#1E1E1E"
+        android:textSize="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -41,21 +39,44 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="8dp"
         android:isIndicator="true"
         android:numStars="5"
         android:progressTint="#FFEB3B"
-        android:rating="5"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        android:rating="4.5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/average_scoreText" />
 
+    <TextView
+        android:id="@+id/average_scoreText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="4.50"
+        android:textColor="#000000"
+        android:textSize="35dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/EvaluateTitle" />
+
+    <TextView
+        android:id="@+id/numberOfEvaluate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="15dp"
+        android:text="30명"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/average_scoreView"
+        app:layout_constraintStart_toEndOf="@+id/average_scoreText" />
+
     <ScrollView
-        android:id="@+id/scrollView2"
+        android:id="@+id/scrollView1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="200dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,21 +86,34 @@
             android:id="@+id/evaluateDB"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_margin="20dp"
             android:orientation="vertical">
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/EachID"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="NAME" />
+
+                <RatingBar
+                    style="@style/Widget.AppCompat.RatingBar.Indicator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:id="@+id/textView19"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="리뷰Text테스트 \n 안녕하세요평점 및 리뷰테스트입니다. " />
+
+            </LinearLayout>-->
 
         </LinearLayout>
     </ScrollView>
-
-    <TextView
-        android:id="@+id/average_scoreText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="4.5"
-        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#000000"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

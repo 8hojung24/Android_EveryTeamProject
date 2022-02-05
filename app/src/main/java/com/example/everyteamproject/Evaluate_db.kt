@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 
 class Evaluate_db(context : Context, name: String?, factory: SQLiteDatabase.CursorFactory?, version: Int) : SQLiteOpenHelper(context, name, factory, version){
     override fun onCreate(db: SQLiteDatabase?){
-        db!!.execSQL("CREATE TABLE evaluateDB (personal_key text, score INNTEGER, review text)")
+        db!!.execSQL("CREATE TABLE evaluateDB (personal_key text, personal_name text, score INNTEGER, review text)")
     }
 
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion:Int){

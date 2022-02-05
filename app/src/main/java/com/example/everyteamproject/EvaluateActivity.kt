@@ -23,6 +23,7 @@ class EvaluateActivity : AppCompatActivity() {
     lateinit var evaluate_SubmitBtn : Button
     lateinit var evaluate_CancelBtn : Button
     lateinit var userid : String
+    lateinit var username : String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,13 +37,14 @@ class EvaluateActivity : AppCompatActivity() {
         dbManager = Evaluate_db(this, "evaluateDB", null,1)
         UserApiClient.instance.me { user, error ->
             userid = "${user?.id}"
+            username = "${user?.kakaoAccount?.profile?.nickname}"
         }
 
         evaluate_SubmitBtn.setOnClickListener{
 
             //별점, 리뷰저장
             sqlitedb = dbManager.writableDatabase
-            sqlitedb.execSQL("INSERT INTO evaluateDB VALUES ('"+ userid +"', '"+ evaluateRb.rating.toFloat() +"', '"+ evaluateEditText.text.toString() +"');")
+            sqlitedb.execSQL("INSERT INTO evaluateDB VALUES ('"+ userid +"', '" + username +"', '"+ evaluateRb.rating.toFloat() +"', '"+ evaluateEditText.text.toString() +"');")
             sqlitedb.close()
 
             //제출 후 설정페이지로 돌아가기
@@ -65,5 +67,17 @@ class EvaluateActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+    // 하단 소프트키 없애기 (몰입모드)
+    override fun onWindowFocusChanged(hasFocus: Boolean) {
+        super.onWindowFocusChanged(hasFocus)
+        if (hasFocus) {
+            window.decorView.systemUiVisibility = (View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                    or View.SYSTEM_UI_FLAG_FULLSCREEN
+                    or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY)
+        }
     }
 }

@@ -13,10 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.모두의팀플">
-        <activity android:name=".StudyGroup"></activity>
+
         <!-- 시작페이지 설정. 작업시 변경 후 push하기 전에 원래대로 -->
-        <activity android:name=".Schedule_memo" />
-        <activity android:name=".Schedule_Edit"/>
         <activity android:name=".LoginActivity"
             android:exported="true">
             <intent-filter>
@@ -48,6 +46,9 @@
         <activity android:name=".Evaluate_View"/>
         <activity android:name=".Edit" />
         <activity android:name=".Schedule_registration"/>
+        <activity android:name=".StudyGroup"/>
+        <activity android:name=".Schedule_memo" />
+        <activity android:name=".Schedule_Edit"/>
 
     </application>
 
