@@ -30,6 +30,7 @@ class Schedule_Edit() : AppCompatActivity() {
     lateinit var closingTime2: TextView
     lateinit var delBtn: Button
     lateinit var saveBtn: Button
+    lateinit var etPlace: EditText
 
     lateinit var mDBHelper: DBHelper
     lateinit var ScheduleItems : MutableList<ScheduleItem>
@@ -50,9 +51,27 @@ class Schedule_Edit() : AppCompatActivity() {
         delBtn = findViewById<Button>(R.id.delBtn)
         memoBtn = findViewById<Button>(R.id.memoBtn)
         saveBtn = findViewById<Button>(R.id.saveBtn)
+        etPlace = findViewById(R.id.etPlace)
 
         ScheduleItems = mutableListOf<ScheduleItem>()
         mDBHelper = DBHelper(this)
+
+        // 수정 이전 데이터 불러오기
+        var getTitle = (intent.getStringExtra("title"))
+        var getDate = (intent.getStringExtra("date"))
+        var getStart = (intent.getStringExtra("startTime"))
+        var getEnd = (intent.getStringExtra("endTime"))
+        var getPlace = (intent.getStringExtra("place"))
+
+        Title.setText(getTitle)
+        ShowDate.setText(getDate)
+        closingTime1.setText(getStart)
+        closingTime2.setText(getEnd)
+        etPlace.setText(getPlace)
+
+        // 마우스 커서를 글자 뒤로 보내기
+        Title.setSelection(Title.text.length)
+        etPlace.setSelection(etPlace.text.length)
 
         // 뒤로가기 버튼
         back.setOnClickListener {
@@ -116,7 +135,7 @@ class Schedule_Edit() : AppCompatActivity() {
 
         saveBtn.setOnClickListener {
             var num = (intent.getStringExtra("id"))?.toInt()
-            mDBHelper.Update(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), "장소", num)
+            mDBHelper.Update(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), etPlace.text.toString(), num)
             mAdapter?.notifyDataSetChanged()
             Toast.makeText(applicationContext, "일정이 수정 되었습니다", Toast.LENGTH_SHORT).show()
 

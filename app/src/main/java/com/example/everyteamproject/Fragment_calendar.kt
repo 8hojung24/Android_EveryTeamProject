@@ -68,7 +68,7 @@ class Fragment_calendar : Fragment(){
         return v
     }
 
-    //수정 필요
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

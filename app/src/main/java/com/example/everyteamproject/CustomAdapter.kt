@@ -40,10 +40,16 @@ class CustomAdapter(var scheduleItems: MutableList<ScheduleItem>?, val mContext:
         holder.listTitle.text = scheduleItems?.get(position)?.title
         holder.startTime.text = scheduleItems?.get(position)?.startTime
         holder.endTime.text = scheduleItems?.get(position)?.endTime
+        holder.tv_place.text = scheduleItems?.get(position)?.place
 
         holder.itemView.setOnClickListener {
             var intent = Intent(holder.itemView?.context, Schedule_Edit()::class.java)
             intent.putExtra("id", (scheduleItems?.get(position)?.id).toString())
+            intent.putExtra("title", (scheduleItems?.get(position)?.title))
+            intent.putExtra("date", (scheduleItems?.get(position)?.date))
+            intent.putExtra("startTime", (scheduleItems?.get(position)?.startTime))
+            intent.putExtra("endTime", (scheduleItems?.get(position)?.endTime))
+            intent.putExtra("place", (scheduleItems?.get(position)?.place))
             ContextCompat.startActivity(holder.itemView.context, intent, null)
         }
     }
@@ -52,6 +58,7 @@ class CustomAdapter(var scheduleItems: MutableList<ScheduleItem>?, val mContext:
         val listTitle = itemView.findViewById<TextView>(R.id.listTitle)
         val startTime = itemView.findViewById<TextView>(R.id.startTime)
         val endTime = itemView.findViewById<TextView>(R.id.endTime)
+        val tv_place = itemView.findViewById<TextView>(R.id.tv_place)
     }
 
     // 액티비티에서 호출되는 함수이며, 현재 어댑터에 새로운 게시글 아이템을 전달받아 추가하는 목적이다.

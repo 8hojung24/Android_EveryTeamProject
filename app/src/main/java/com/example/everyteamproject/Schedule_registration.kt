@@ -23,6 +23,7 @@ class Schedule_registration : AppCompatActivity() {
     lateinit var ShowDate: TextView
     lateinit var closingTime1: TextView
     lateinit var closingTime2: TextView
+    lateinit var etPlace: EditText
 
     lateinit var back: Button
     lateinit var ChooseDate: Button
@@ -45,6 +46,7 @@ class Schedule_registration : AppCompatActivity() {
         back = findViewById<Button>(R.id.back)
         ChooseDate = findViewById<Button>(R.id.ChooseDate)
         addShedule = findViewById<Button>(R.id.addShedule)
+        etPlace = findViewById(R.id.etPlace)
 
         mDBHelper = DBHelper(this)
         ScheduleItems = mutableListOf<ScheduleItem>()
@@ -96,7 +98,7 @@ class Schedule_registration : AppCompatActivity() {
         // 저장 Button이 클릭되면
         addShedule.setOnClickListener {
             //Insert Database
-            mDBHelper.Insert(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), "장소")
+            mDBHelper.Insert(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), etPlace.text.toString())
             Toast.makeText(applicationContext, "입력됨", Toast.LENGTH_SHORT).show()
 
             // Insert UI
@@ -111,6 +113,7 @@ class Schedule_registration : AppCompatActivity() {
         item.title = Title.text.toString()
         item.startTime = closingTime1.text.toString()
         item.endTime = closingTime2.text.toString()
+        item.place = etPlace.text.toString()
         ScheduleItems?.add(item)
         mAdapter?.addItem(item)
         mAdapter?.notifyDataSetChanged()
