@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class Schedule_registration : AppCompatActivity() {
-    var fname: String = ""
+    var mDate = ""
     var dateString = ""
     var timeString = ""
 
@@ -23,6 +23,7 @@ class Schedule_registration : AppCompatActivity() {
     lateinit var ShowDate: TextView
     lateinit var closingTime1: TextView
     lateinit var closingTime2: TextView
+    lateinit var etPlace: EditText
 
     lateinit var back: Button
     lateinit var ChooseDate: Button
@@ -45,6 +46,7 @@ class Schedule_registration : AppCompatActivity() {
         back = findViewById<Button>(R.id.back)
         ChooseDate = findViewById<Button>(R.id.ChooseDate)
         addShedule = findViewById<Button>(R.id.addShedule)
+        etPlace = findViewById(R.id.etPlace)
 
         mDBHelper = DBHelper(this)
         ScheduleItems = mutableListOf<ScheduleItem>()
@@ -66,7 +68,7 @@ class Schedule_registration : AppCompatActivity() {
                 val DayName: String = Simpledateformat.format(Date)
                 dateString = "${month+1}.${dayOfMonth}($DayName)"
                 ShowDate.text = dateString // 날짜를 보여주는 텍스트에 해당 날짜를 넣는다.
-
+                mDate = "${year}/${month+1}/${dayOfMonth}"
             }
             val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
 
@@ -96,7 +98,7 @@ class Schedule_registration : AppCompatActivity() {
         // 저장 Button이 클릭되면
         addShedule.setOnClickListener {
             //Insert Database
-            mDBHelper.Insert(Title.text.toString(), ShowDate.text.toString(), closingTime1.text.toString(), closingTime2.text.toString(), "장소")
+            mDBHelper.Insert(Title.text.toString(), mDate, closingTime1.text.toString(), closingTime2.text.toString(), etPlace.text.toString())
             Toast.makeText(applicationContext, "입력됨", Toast.LENGTH_SHORT).show()
 
             // Insert UI
@@ -111,6 +113,7 @@ class Schedule_registration : AppCompatActivity() {
         item.title = Title.text.toString()
         item.startTime = closingTime1.text.toString()
         item.endTime = closingTime2.text.toString()
+        item.place = etPlace.text.toString()
         ScheduleItems?.add(item)
         mAdapter?.addItem(item)
         mAdapter?.notifyDataSetChanged()
