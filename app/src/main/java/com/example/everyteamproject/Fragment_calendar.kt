@@ -12,9 +12,7 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.everyteamproject.com.example.everyteamproject.CustomAdapter
-import com.example.everyteamproject.com.example.everyteamproject.DBHelper
-import com.example.everyteamproject.com.example.everyteamproject.ScheduleItem
+import com.example.everyteamproject.com.example.everyteamproject.*
 import java.util.*
 
 
@@ -43,19 +41,8 @@ class Fragment_calendar : Fragment(){
         mDBHelper = DBHelper(context)
         mAdapter?.mDBHelper = mDBHelper as DBHelper
 
-//        var mAdapter = CustomAdapter(ScheduleItems, requireContext())
-//        rv_todo.adapter = mAdapter
-//        rv_todo.layoutManager = LinearLayoutManager(activity)
-
-        mAdapter = getContext()?.let { ScheduleItems?.let { it1 -> CustomAdapter(it1, it) } }
-        mAdapter?.scheduleItems = ScheduleItems as MutableList<ScheduleItem>
-        var linearLayoutManager = LinearLayoutManager(activity)
-        linearLayoutManager.orientation=RecyclerView.VERTICAL
-        rv_todo?.adapter = mAdapter
-        rv_todo?.layoutManager = linearLayoutManager
-        mAdapter?.notifyDataSetChanged()
-
         loadRecentDB()
+        init()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -112,10 +99,21 @@ class Fragment_calendar : Fragment(){
     private fun loadRecentDB() {
         // 저장되어있던 DB를 가져온다.
         ScheduleItems = mDBHelper?.getScheduleList()
-        if (mAdapter == null)
-            mAdapter = CustomAdapter(ScheduleItems, requireContext())
-        rv_todo.setHasFixedSize(true)
-        rv_todo.setAdapter(mAdapter)
+        if (mAdapter == null) {
+            mAdapter = context?.let { CustomAdapter(ScheduleItems, it) }
+            rv_todo.setHasFixedSize(true)
+            rv_todo.setAdapter(mAdapter)
+        }
+    }
+
+    fun init() {
+        mAdapter = context?.let { CustomAdapter(ScheduleItems, it) }
+        mAdapter?.scheduleItems = ScheduleItems as MutableList<ScheduleItem>
+        var linearLayoutManager = LinearLayoutManager(activity)
+        linearLayoutManager.orientation=RecyclerView.VERTICAL
+        rv_todo?.adapter = mAdapter
+        rv_todo?.layoutManager = linearLayoutManager
+
     }
 
 }
