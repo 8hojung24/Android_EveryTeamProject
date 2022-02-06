@@ -34,6 +34,7 @@ class StudyGroup :AppCompatActivity(){
         tvClosingTime = findViewById(R.id.tvClosingTime)
         back = findViewById(R.id.back)
 
+        //DB read
         if(intent.hasExtra("id")) {
             i = intent.getStringExtra("id")!!.toInt()
             sqliteDB = mDataBaseHandler.readableDatabase
@@ -48,6 +49,7 @@ class StudyGroup :AppCompatActivity(){
             }
         }
 
+        // 뒤로가기 버튼
         back.setOnClickListener {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)

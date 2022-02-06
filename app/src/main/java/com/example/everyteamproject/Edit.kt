@@ -46,6 +46,7 @@ class Edit : AppCompatActivity() {
 
         mDataBaseHandler = DataBaseHandler(this)
 
+        // Read Database
         if(intent.hasExtra("id")) {
             sqliteDB = mDataBaseHandler.readableDatabase
             var cursor: Cursor
@@ -60,6 +61,7 @@ class Edit : AppCompatActivity() {
             }
         }
 
+        //DatePickderDiaglog
         DeadlineBtn.setOnClickListener {
             val cal = Calendar.getInstance()
 
@@ -74,11 +76,12 @@ class Edit : AppCompatActivity() {
             val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),
                     cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
 
-//           최소 날짜를 현재 시각 이후로
+            // 최소 날짜를 현재 시각 이후로
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
             dpd.show()
         }
 
+        // TimePickderDialog
         ClosingTime.setOnClickListener{
             val cal = Calendar.getInstance()
             var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
@@ -100,7 +103,7 @@ class Edit : AppCompatActivity() {
             })
         }
 
-        //DB
+        // 수정하기 버튼
         EditBtn.setOnClickListener {
             //Update Database
             mDataBaseHandler.Update(ProjectName.text.toString(), Role.text.toString(), Deadline.text.toString(), ClosingTime.text.toString(), i)
@@ -111,6 +114,7 @@ class Edit : AppCompatActivity() {
 
         }
 
+        // 뒤로가기 버튼
         back.setOnClickListener {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)

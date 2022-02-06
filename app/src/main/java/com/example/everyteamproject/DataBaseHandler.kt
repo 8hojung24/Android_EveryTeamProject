@@ -48,14 +48,12 @@ class DataBaseHandler(var context: Context?) : SQLiteOpenHelper(context, "MyDB2"
     // INSERT 문
     fun Insert(_ProjectName : String, _Role : String, _DeadLine : String, _ClosingTime : String) {
         sqliteDB = this.writableDatabase
-
         sqliteDB.execSQL("INSERT INTO ProjectDB (ProjectName, Role, DeadLine, ClosingTime) VALUES ('" + _ProjectName + "','" + _Role + "', '" + _DeadLine + "', '" + _ClosingTime  + "');")
     }
 
     // UPDATE 문 (프로젝트 목록을 수정 한다.)
     fun Update(_ProjectName : String, _Role : String, _DeadLine : String, _ClosingTime : String, _id: Int?){
         sqliteDB = this.writableDatabase
-
         sqliteDB.execSQL("UPDATE ProjectDB SET ProjectName = '"+
                 _ProjectName +"', Role = '"+ _Role +"', DeadLine = '"+
                 _DeadLine +"', ClosingTime = '"+ _ClosingTime  +"' WHERE id ='" + _id +"'")

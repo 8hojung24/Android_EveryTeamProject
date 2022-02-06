@@ -32,11 +32,13 @@ class Schedule_memo : AppCompatActivity() {
 
         loadData()
 
+        // 뒤로가기 버튼
         back.setOnClickListener {
             var intent = Intent(this, Schedule_Edit::class.java)
             startActivity(intent)
         }
 
+        // 저장 버튼
         saveBtn.setOnClickListener {
             saveData(Title.text.toString(), Memo.text.toString())
             var intent = Intent(this, MainActivity2::class.java)
@@ -46,7 +48,9 @@ class Schedule_memo : AppCompatActivity() {
             startActivity(intent)
         }
 
+        // 삭제 버튼
         delBtn.setOnClickListener {
+            // 초기화
             Title.setText(null)
             Memo.setText(null)
             Toast.makeText(this, "삭제되었습니다", Toast.LENGTH_SHORT).show()

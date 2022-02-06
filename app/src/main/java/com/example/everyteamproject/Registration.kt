@@ -42,9 +42,9 @@ class Registration : AppCompatActivity() {
         mDataBaseHandler = DataBaseHandler(this)
         projects = mutableListOf<project>()
 
+        //DatePickderDiaglog
         DeadlineBtn.setOnClickListener {
             val cal = Calendar.getInstance()
-
             val dateSetListener = DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 cal.set(year, month, dayOfMonth)
                 val Date = cal.time
@@ -56,11 +56,12 @@ class Registration : AppCompatActivity() {
             val dpd = DatePickerDialog(this, dateSetListener, cal.get(Calendar.YEAR),
                 cal.get(Calendar.MONTH),cal.get(Calendar.DAY_OF_MONTH))
 
-//           최소 날짜를 현재 시각 이후로
+            // 최소 날짜를 현재 시각 이후로
             dpd.datePicker.minDate = System.currentTimeMillis() - 1000;
             dpd.show()
         }
 
+        // TimePickdeDialog
         ClosingTime.setOnClickListener{
             val cal = Calendar.getInstance()
             var timeSetListener = TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
@@ -82,10 +83,9 @@ class Registration : AppCompatActivity() {
             })
         }
 
-        //DB
+        // 수정하기 버튼
         EditBtn.setOnClickListener {
             //Insert Database
-
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
 
@@ -93,6 +93,8 @@ class Registration : AppCompatActivity() {
             Toast.makeText(applicationContext, "추가되었습니다.", Toast.LENGTH_SHORT).show()
 
         }
+
+        // 뒤로가기 버튼
         back.setOnClickListener {
             val intent = Intent(this, MainActivity2::class.java)
             startActivity(intent)
