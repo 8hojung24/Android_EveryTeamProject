@@ -18,6 +18,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.*
 import kotlinx.android.synthetic.main.activity_evaluate.*
+import kotlinx.android.synthetic.main.activity_set.*
 
 
 @Suppress("DEPRECATION")
@@ -94,12 +95,13 @@ class FeedbackActivity : AppCompatActivity() {
         feedback_SubmitBtn.setOnClickListener {
             val send_intent = Intent(Intent.ACTION_SENDTO)
             send_intent.data = Uri.parse("mailto:abc123@naver.com")
+
             send_intent.putExtra(Intent.EXTRA_SUBJECT, feedbackTitleText.text.toString())
             send_intent.putExtra(Intent.EXTRA_TEXT, feedbackEditText.text.toString())
 
-            //이미지가 있다면
-            /*if (selectedImageUri != null) {
-                send_intent.putExtra(Intent.EXTRA_STREAM, selectedImageUri.toString())
+            /*//이미지가 있다면
+            if (::selectedImageUri.isInitialized) {
+                send_intent.putExtra(Intent.EXTRA_STREAM, selectedImageUri)
             }*/
 
             if (send_intent.resolveActivity(packageManager) != null) {
@@ -132,7 +134,7 @@ class FeedbackActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
 
         if (requestCode == Gallery && resultCode == RESULT_OK && data != null && data.data != null) {
-            var selectedImageUri: Uri = data.data!!
+            selectedImageUri = data.data!!
             attachImg1.setImageURI(selectedImageUri);
         }
     }
