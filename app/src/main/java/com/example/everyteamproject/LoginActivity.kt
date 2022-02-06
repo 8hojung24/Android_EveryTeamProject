@@ -17,7 +17,10 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
+        
+        //카카오 카카오 로그인 hash 키 
+            val keyHash = Utility.getKeyHash(this)
+                Log.d("Hash", keyHash)
 
         // 로그인 정보 확인
         UserApiClient.instance.accessTokenInfo { tokenInfo, error ->
